@@ -97,4 +97,111 @@ class getDBAction
             var_dump($e);
         }
     }
+    /**
+     ** 案件データのCSVをDBに保存するクラスメソッド
+     */
+    function uploadCSV($CSVFile)
+    {
+        ///////  CSVをサーバに保存するフロー  ///////
+        // var_dump($CSVFile);
+        /// ファイルの存在チェック ///
+        if (is_uploaded_file($CSVFile['csvfile']['tmp_name'])) {
+            $tmpFileName = $CSVFile['csvfile']['tmp_name'];
+            $fileName = $CSVFile['csvfile']['name'];
+            /// 拡張子のチェック ///
+            if (pathinfo($fileName, PATHINFO_EXTENSION) != 'csv') {
+                $errMsg = '・CSVファイルのみ対応しています';
+            } else {
+                /// ファイルをdataディレクトリに移動する ///
+                $file = "./data/uploaded/" . $fileName;
+                if (move_uploaded_file($tmpFileName, $file)) {
+                    /// 後で削除できるように権限を644にする ///
+                    chmod($file, 0644);
+                    $msg = "【" . $fileName . "】をアップロードしました！";
+                    $fp = fopen($file, "r");
+                    /// 配列に変換する ///
+                    while (($data = fgetcsv($fp, 0, ',', '"')) !== FALSE) {
+                        $aryCSV[] = $data;
+                    }
+                    fclose($fp);
+                    /// ファイルの削除 ///
+                    unlink($file);
+                } else {
+                    $errMsg = '・ファイルをアップロードできません！';
+                }
+            }
+        } else {
+            $errMsg = '・ファイルが選択されていません！';
+        }
+
+
+        ///////  配列データをDBに保存するフロー  ///////
+        ///////  SQL文作成処理  ///////
+        /// 導入文 ///
+        $sql = 'INSERT INTO job_info ';
+        // echo "<br>" . $sql . "<br>";
+
+        $aryHeader = $aryCSV[0];  /// ヘッダ配列の定義
+        $sizeAryCSV = count($aryCSV);  /// CSVの行数の定義
+
+        /// カラム名の定義 ///
+        $tmpAry = [];
+        foreach ($aryHeader as $headerName) {
+            $tmpAry[] = $headerName;
+        }
+        /// 定義したカラム名を導入文と結合する ///
+        $sql .= '(' . implode(',', $tmpAry) . ')';
+        // echo "<br>" . $sql . "<br>";
+
+        /// バインドのためのVALUEを定義する ///
+        $tmpAry1 = [];
+        /// ヘッダ行以降の行ごとに繰り返す ///
+        for ($rowIdx = 1; $rowIdx < $sizeAryCSV; ++$rowIdx) {
+            $tmpAry2 = [];
+            /// カラム名ごとに繰り返す ///
+            foreach ($aryHeader as $headerName) {
+                $tmpAry2[] = ':' . $headerName . $rowIdx;
+            }
+            $tmpAry1[] = '(' . implode(',', $tmpAry2) . ')';
+        }
+        /// 定義したバインドのためのVALUEを結合する ///
+        $sql .= ' VALUES ' . implode(',', $tmpAry1);
+        // echo "<br>" . $sql . "<br>";
+
+        /// トランザクション開始 ///
+        $this->pdo->beginTransaction();
+        try {
+            /// sql分の発行 ///
+            $stmt = $this->pdo->prepare($sql);
+
+            /// bind処理をする ///
+            /// ヘッダ行以降の行ごとに繰り返す ///
+            for ($rowIdx = 1; $rowIdx < $sizeAryCSV; ++$rowIdx) {
+                /// カラム名ごとに繰り返す ///
+                foreach ($aryHeader as $colIdx => $headerName) {
+                    $targetValue = $aryCSV[$rowIdx][$colIdx];
+                    $stmt->bindValue(':' . $headerName . $rowIdx, $targetValue, PDO::PARAM_STR);
+                    // echo "<br>" . ':' . $headerName . $rowIdx . ", " . $targetValue . "<br>";
+
+                }
+            }
+
+            $stmt->execute();
+
+            /// コミット ///
+            $this->pdo->commit();
+        } catch (PDOException $e) {
+            //ロールバック ///
+            $this->pdo->rollback();
+            /// エラーメッセージ出力 ///
+            // echo "<br>::errorInfo():<br>";
+            // print_r($stmt->errorInfo());
+            $errMsg  = $e->getMessage();
+        }
+        ///  ///
+        if ($errMsg) {
+            $msg = $errMsg;
+        }
+        return $msg;
+    }
 }

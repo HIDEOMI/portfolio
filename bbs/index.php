@@ -42,6 +42,21 @@ switch ($event) {
         /// 案件カウント取得///
         $job_counts = $action->getCountData();
         break;
+    case 'upload':
+        ///////  アップロードフォームを表示するイベント  ///////
+        require_logined_session();  /// ログイン状態のチェック
+        $page_name = "CSVアップロード";
+        $content_page = "./view/upload.php";
+        break;
+    case 'csvUpload':
+        ///////  CSVをアップロードするイベント  ///////
+        require_logined_session();  /// ログイン状態のチェック
+        /// CSVの内容をDBにアップロード ///
+        $result_msg = $action->uploadCSV($_FILES);
+        /// アップロードフォームを表示する ///
+        $page_name = "CSVアップロード";
+        $content_page = "./view/upload.php";
+        break;
     case 'login':
         ///////  ログインフォームを表示するイベント  ///////
         /// ログイン状態のチェック ///
