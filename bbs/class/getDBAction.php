@@ -19,6 +19,33 @@ class getDBAction
         }
     }
     /**
+     ** ログイン情報を取得するクラスメソッド
+     */
+    function chkPass($input_username)
+    {
+        /// post送信されてきたユーザー名がデータベースにあるか検索する ///
+        $sql = "SELECT * FROM users WHERE name=?";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->bindParam(1, $input_username, PDO::PARAM_STR, 10);
+        $stmt->execute();
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result['password'];
+    }
+    /**
+     ** 案件データ一覧の件数をDBから取得するクラスメソッド
+     */
+    function getCountData()
+    {
+        /// 登録済み案件データの取得 ///
+        $sql = "SELECT COUNT(*) FROM job_info;";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+
+        /// 実行結果の件数を返す ///
+        $count = $stmt->fetchColumn();
+        return $count;
+    }
+    /**
      ** 案件データ一覧をDBから取得するクラスメソッド
      */
     function getDbPostData()

@@ -14,21 +14,24 @@
         <div id="header_link">
             <form action="./index.php" method="post" id="header_form">
                 <ul id="header_list">
-                    <li>
-                        <button type="sunmit" class="header_btn" name="event_id" value="form">記事投稿</button>
-                    </li>
-                    <li>
-                        <button type="sunmit" class="header_btn" name="event_id" value="upload">アップロード</button>
-                    </li>
-                    <li>
-                        <button type="sunmit" class="header_btn" name="event_id" value="logout">ログアウト</button>
-                    </li>
-                    <li>
-                        <button type="sunmit" class="header_btn" name="event_id" value="signUp">新規登録</button>
-                    </li>
-                    <li>
-                        <button type="sunmit" class="header_btn" name="event_id" value="login">ログイン</button>
-                    </li>
+                    <?php if (isset($_SESSION['username'])) : ?>
+                        <li>
+                            <button type="sunmit" class="header_btn" name="event_id" value="form">記事投稿</button>
+                        </li>
+                        <li>
+                            <button type="sunmit" class="header_btn" name="event_id" value="upload">アップロード</button>
+                        </li>
+                        <li>
+                            <button type="sunmit" class="header_btn" name="event_id" value="logout">ログアウト</button>
+                        </li>
+                    <?php else : ?>
+                        <li>
+                            <button type="sunmit" class="header_btn" name="event_id" value="signUp">新規登録</button>
+                        </li>
+                        <li>
+                            <button type="sunmit" class="header_btn" name="event_id" value="login">ログイン</button>
+                        </li>
+                    <?php endif; ?>
                 </ul>
             </form>
         </div>
