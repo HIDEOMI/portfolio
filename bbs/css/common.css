@@ -1,0 +1,366 @@
+/*******  変数定義  *******/
+:root {
+    --color-1: #f9fbfe;
+    --color-2: #e2e2e2;
+    --color-3: #badbec;
+    --color-4: #2b546a;
+    --color-5: #555555;
+    --color-6: #4e8f48;
+    --color-7: #ffc64a;
+    --color-8: #f2f2f2;
+}
+
+/*******  CSSの初期化  *******/
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Hiragino Kaku Gothic ProN W3', sans-serif;
+    border-collapse: collapse;
+    box-sizing: border-box;
+    color: var(--color-4, black);
+}
+li {
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    display: inline-block;
+}
+p, li, a {
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+p {
+    font-weight: normal;
+}
+
+
+/***************************/
+/*******  下記メイン  *******/
+/***************************/
+/*******  タグ要素について  *******/
+html {
+    font-size: 10px;
+}
+
+body {
+    min-width: 950px;
+    background-color: var(--color-2, grey);
+}
+span {
+    font-size: 2rem;
+}
+
+h1, h1 * {
+    font-size: 5.6rem;
+}
+
+h2, h2 * {
+    font-size: 4rem;
+}
+
+h3, h3 * {
+    font-size: 2.5rem;
+}
+button {
+    border: none;
+}
+
+/*******  ヘッダーについて  *******/
+header {
+    height: 200px;
+    background-color: var(--color-4, blue);
+}
+
+header * {
+    color: var(--color-1, whitesmoke);
+}
+
+#header_container {
+    display: flex;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* ヘッダーロゴについて */
+#header_logo {
+    display: inline-block;
+}
+
+#logo_top {
+    font-weight: bold;
+    color: orange;
+}
+
+#logo_bottom {
+    padding-left: 20px;
+}
+
+/* ヘッダーリンクについて */
+#header_link {
+    margin: 0 0 0 auto;
+}
+
+#header_form {
+    margin-top: 30px;
+    /* height: 100%; */
+}
+
+#header_list {
+    /* height: 100%; */
+    display: flex;
+}
+
+.header_btn {
+    margin-left: 2px;
+    padding: 7px;
+    font-size: 1.6rem;
+    font-weight: bolder;
+    border-radius: 9px;
+    color: var(--color-5, black);
+    background-color: var(--color-3, grey);
+}
+
+/*******  ページ見出しについて  *******/
+#page_header_wrapper {
+    height: 100px;
+    background-color: var(--color-1, whitesmoke);
+}
+
+#page_header_container {
+    max-width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+}
+
+#page_header_title {
+    float: left;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/*******  メインコンテンツ全体について  *******/
+#main_wrapper {    
+    min-width: 900px;
+    width: 950px;
+    margin: 0 auto;
+}
+
+#main_container {
+    width: 900px;
+    padding: 40px 40px 25px 60px;
+    margin: 34px auto;
+    font-size: 1.6rem;
+    font-weight: bold;
+    border-radius: 9px;
+    background-color: var(--color-1, whitesmoke);
+}
+
+
+/*******  案件ヘッダーについて  *******/
+
+/* ソートについて */
+.job_sort {
+    height: 70px;
+    margin-top: 40px;
+    margin-bottom: 50px;
+    padding: 10px 30px;
+    background-color: var(--color-1, whitesmoke);
+}
+
+.job_sort_number {
+    display: inline-block;
+    margin-left: 10px;
+    font-size: 3.6rem;
+}
+
+.job_sort_list {
+    display: flex;
+    float: right;
+    padding-top: 5px;
+}
+
+.job_sort_item {
+    padding-left: 30px;
+}
+
+.job_sort_label {
+    float: left;
+    margin-top: 10px;
+    margin-right: 13px;
+    font-weight: bolder;
+}
+
+.job_sort_select {
+    padding: 5px 10px 5px 5px;
+    font-size: 1.6rem;
+}
+
+/* ページネイションについて */
+.pagination_list {
+    display: flex;
+    justify-content: center;
+}
+
+.pagination_item {
+    border: solid 0.5px var(--color-2, grey);
+    background-color: var(--color-1, whitesmoke);
+}
+
+.pagination_link {
+    padding: 4px 12px;
+}
+
+/*******  案件コンテンツについて  *******/
+#job_card_container {
+    width: 900px;
+    margin: 0 auto;
+}
+
+.job_card {
+    display: inline-block;
+    width: 100%;
+    padding: 25px 40px;
+    margin: 34px 0px;
+    border-radius: 9px;
+    background-color: var(--color-1, whitesmoke);
+}
+
+/* 案件の上部について */
+.job_title {
+    display: inline-block;
+}
+
+.job_status {
+    margin: 10px 0px;
+}
+
+.job_status_item {
+    display: inline-block;
+    padding: 5px 20px;
+    margin: 0 10px;
+	font-weight: bolder;
+    font-size: 1.4rem;
+    border-radius: 5px;
+    color: var(--color-4, white);
+    background-color: var(--color-3, blue);
+}
+
+.job_num {
+    float: right;
+    font-size: 1.2rem;
+}
+
+.job_lead {
+    font-size: 1.4rem;
+    color: var(--color-5, black);
+}
+
+/* 案件の中部について */
+.job_middle {
+    margin: 15px 0;;
+}
+
+.job_table {
+    display: inline-block;
+    text-align: left;
+}
+
+.job_table_row {
+    border: solid 1px grey;
+}
+
+.job_table th {
+    width: 110px;
+    color: var(--color-1, whitesmoke);
+    background-color: var(--color-4, black);
+}
+
+.job_table td {
+    width: 330px;
+}
+
+.job_table th, td{
+    padding: 8px 18px;
+    font-size: 1.4rem;
+}
+
+.job_middle_right {
+    float: right;
+    width: 350px;
+    border-radius: 5px;
+    border: solid 1px var(--color-4, grey);
+    background-color: var(--color-2, whitesmoke);
+}
+
+.job_tips_title{
+    display: inline-block;
+    padding: 7px 20px 7px 14px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    border-bottom-right-radius: 5px;
+    color: var(--color-1, whitesmoke);
+    background-color: var(--color-6, green);
+}
+
+.job_tips {
+    min-height: 150px;
+    padding: 10px;
+    font-size: 1.4rem;
+    font-weight: bolder;
+    color: var(--color-5, black);
+}
+
+/* 案件の下部について */
+.job_btn_container {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.job_btn{
+    margin: 0 auto;
+    border: none;
+    border-radius: 17px;
+}
+
+.job_btn a {
+    padding: 9px 27px;
+    font-size: 1.8rem;
+    border-radius: 17px;
+}
+
+.job_btn_link_favorite {
+    background-color: var(--color-7, orange);
+}
+
+.job_btn_link_detail {
+    background-color: var(--color-2, whitesmoke);
+}
+
+.job_btn_link_hide {
+    color: var(--color-2, whitesmoke);
+    background-color: var(--color-5, grey);
+}
+
+/*******  フッターについて  *******/
+footer {
+    text-align: center;
+    background-color: var(--color-1, whitesmoke);
+}
+
+#footer_top {
+    height: 60px;
+}
+
+#footer_middle {
+    height: 200px;
+}
+
+#footer_bottom {
+    display: block;
+    height: 100px;
+    color: var(--color-2, whitesmoke);
+    background-color: var(--color-4, grey);
+}
