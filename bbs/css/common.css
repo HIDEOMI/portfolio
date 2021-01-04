@@ -8,10 +8,13 @@
     --color-6: #4e8f48;
     --color-7: #ffc64a;
     --color-8: #f2f2f2;
+    
+    /* --shadow-1: 0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12); */
 }
 
 /*******  CSSの初期化  *******/
 * {
+    /* background-color: var(--color-1, white); */
     padding: 0;
     margin: 0;
     font-family: 'Hiragino Kaku Gothic ProN W3', sans-serif;
@@ -343,6 +346,63 @@ header * {
     color: var(--color-2, whitesmoke);
     background-color: var(--color-5, grey);
 }
+
+
+/*******  記事投稿フォームについて  *******/        
+.form_job_row {
+    border-bottom: solid 1px var(--color-4, grey);
+}
+
+.form_job_row th {
+    padding: 10px 30px;
+    text-align: left;
+    border-bottom: solid 1px var(--color-3, whitesmoke);
+    background-color: var(--color-4, grey);
+}
+
+.form_job_row label {
+    color: var(--color-1, whitesmoke);    
+}
+
+.form_job_input {
+    padding: 5px;
+}
+
+#btn_job_container {
+    padding-top: 20px;
+    text-align: center;
+}
+
+.btn_job {
+    margin-top: 10px;
+    padding: 10px 20px;
+    font-size: 2rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    color: var(--color-1, whitesmoke);    
+    background-color: var(--color-4, grey);   
+}
+
+#btn_cancel {
+    margin-left: 10px;
+    padding: 10px 20px;
+    border: none;
+    color: var(--color-5, whitesmoke);    
+    background-color: var(--color-2, grey);
+}
+
+
+/*******  ログインフォームについて  *******/
+#form_lead {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+#login_table {
+    margin: 0 auto;
+}
+
 
 /*******  フッターについて  *******/
 footer {
