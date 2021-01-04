@@ -15,21 +15,32 @@ $action = new getDBAction();
 
 /// イベントの初期化 ///
 $event = null;
-
 /// イベント取得 ///
 if (isset($_POST['event_id'])) {
     $event = $_POST['event_id'];
 }
-
 ///////  イベントによって処理が分岐する  ///////
 $page_name = "案件一覧";
 $content_page = "./view/list.php";
-
 switch ($event) {
     case 'test':
         break;
     case 'form':
         ///////  投稿フォームを表示するイベント  ///////
+        require_logined_session();  /// ログイン状態のチェック
+        $page_name = "案件作成";
+        $content_page = "./view/form.php";
+        break;
+    case 'saveJobInfo':
+        ///////  記事を保存するイベント  ///////
+        require_logined_session();  /// ログイン状態のチェック
+        /// DBに記事データを保存 ///
+        $action->saveDBJobInfo($_POST);
+        /// 案件一覧画面を表示する ///
+        /// 案件データ一覧取得 ///
+        $job_datas = $action->getDbPostData();
+        /// 案件カウント取得///
+        $job_counts = $action->getCountData();
         break;
     case 'login':
         ///////  ログインフォームを表示するイベント  ///////
@@ -61,6 +72,7 @@ switch ($event) {
         $job_counts = $action->getCountData();
         break;
 }
+
 ?>
 
 <!------   HTML 開始   ------>
