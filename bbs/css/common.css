@@ -8,7 +8,6 @@
     --color-6: #4e8f48;
     --color-7: #ffc64a;
     --color-8: #f2f2f2;
-    
     /* --shadow-1: 0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12); */
 }
 
@@ -41,7 +40,7 @@ p {
 /***************************/
 /*******  下記メイン  *******/
 /***************************/
-/*******  タグ要素について  *******/
+/*******  タグ要素  *******/
 html {
     font-size: 10px;
 }
@@ -69,7 +68,7 @@ button {
     border: none;
 }
 
-/*******  ヘッダーについて  *******/
+/*******  ヘッダー  *******/
 header {
     height: 200px;
     background-color: var(--color-4, blue);
@@ -86,7 +85,7 @@ header * {
     padding: 20px;
 }
 
-/* ヘッダーロゴについて */
+/* ヘッダーロゴ */
 #header_logo {
     display: inline-block;
 }
@@ -100,7 +99,7 @@ header * {
     padding-left: 20px;
 }
 
-/* ヘッダーリンクについて */
+/* ヘッダーリンク */
 #header_link {
     margin: 0 0 0 auto;
 }
@@ -125,7 +124,7 @@ header * {
     background-color: var(--color-3, grey);
 }
 
-/*******  ページ見出しについて  *******/
+/*******  ページ見出し  *******/
 #page_header_wrapper {
     height: 100px;
     background-color: var(--color-1, whitesmoke);
@@ -135,15 +134,19 @@ header * {
     max-width: 1000px;
     height: 100%;
     margin: 0 auto;
-}
-
-#page_header_title {
-    float: left;
-    margin: 0 auto;
     padding: 20px;
 }
+#page_header_title {
+    display: inline-block;
+}
 
-/*******  メインコンテンツ全体について  *******/
+#page_header_right {
+    float: right;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/*******  メインコンテンツ全体  *******/
 #main_wrapper {    
     min-width: 900px;
     width: 950px;
@@ -160,251 +163,7 @@ header * {
     background-color: var(--color-1, whitesmoke);
 }
 
-
-/*******  案件ヘッダーについて  *******/
-
-/* ソートについて */
-.job_sort {
-    height: 70px;
-    margin-top: 40px;
-    margin-bottom: 50px;
-    padding: 10px 30px;
-    background-color: var(--color-1, whitesmoke);
-}
-
-.job_sort_number {
-    display: inline-block;
-    margin-left: 10px;
-    font-size: 3.6rem;
-}
-
-.job_sort_list {
-    display: flex;
-    float: right;
-    padding-top: 5px;
-}
-
-.job_sort_item {
-    padding-left: 30px;
-}
-
-.job_sort_label {
-    float: left;
-    margin-top: 10px;
-    margin-right: 13px;
-    font-weight: bolder;
-}
-
-.job_sort_select {
-    padding: 5px 10px 5px 5px;
-    font-size: 1.6rem;
-}
-
-/* ページネイションについて */
-.pagination_list {
-    display: flex;
-    justify-content: center;
-}
-
-.pagination_item {
-    border: solid 0.5px var(--color-2, grey);
-    background-color: var(--color-1, whitesmoke);
-}
-
-.pagination_link {
-    padding: 4px 12px;
-}
-
-/*******  案件コンテンツについて  *******/
-#job_card_container {
-    width: 900px;
-    margin: 0 auto;
-}
-
-.job_card {
-    display: inline-block;
-    width: 100%;
-    padding: 25px 40px;
-    margin: 34px 0px;
-    border-radius: 9px;
-    background-color: var(--color-1, whitesmoke);
-}
-
-/* 案件の上部について */
-.job_title {
-    display: inline-block;
-}
-
-.job_status {
-    margin: 10px 0px;
-}
-
-.job_status_item {
-    display: inline-block;
-    padding: 5px 20px;
-    margin: 0 10px;
-	font-weight: bolder;
-    font-size: 1.4rem;
-    border-radius: 5px;
-    color: var(--color-4, white);
-    background-color: var(--color-3, blue);
-}
-
-.job_num {
-    float: right;
-    font-size: 1.2rem;
-}
-
-.job_lead {
-    font-size: 1.4rem;
-    color: var(--color-5, black);
-}
-
-/* 案件の中部について */
-.job_middle {
-    margin: 15px 0;;
-}
-
-.job_table {
-    display: inline-block;
-    text-align: left;
-}
-
-.job_table_row {
-    border: solid 1px grey;
-}
-
-.job_table th {
-    width: 110px;
-    color: var(--color-1, whitesmoke);
-    background-color: var(--color-4, black);
-}
-
-.job_table td {
-    width: 330px;
-}
-
-.job_table th, td{
-    padding: 8px 18px;
-    font-size: 1.4rem;
-}
-
-.job_middle_right {
-    float: right;
-    width: 350px;
-    border-radius: 5px;
-    border: solid 1px var(--color-4, grey);
-    background-color: var(--color-2, whitesmoke);
-}
-
-.job_tips_title{
-    display: inline-block;
-    padding: 7px 20px 7px 14px;
-    font-size: 1.5rem;
-    font-weight: bold;
-    border-bottom-right-radius: 5px;
-    color: var(--color-1, whitesmoke);
-    background-color: var(--color-6, green);
-}
-
-.job_tips {
-    min-height: 150px;
-    padding: 10px;
-    font-size: 1.4rem;
-    font-weight: bolder;
-    color: var(--color-5, black);
-}
-
-/* 案件の下部について */
-.job_btn_container {
-    display: flex;
-    width: 80%;
-    margin: 0 auto;
-}
-
-.job_btn{
-    margin: 0 auto;
-    border: none;
-    border-radius: 17px;
-}
-
-.job_btn a {
-    padding: 9px 27px;
-    font-size: 1.8rem;
-    border-radius: 17px;
-}
-
-.job_btn_link_favorite {
-    background-color: var(--color-7, orange);
-}
-
-.job_btn_link_detail {
-    background-color: var(--color-2, whitesmoke);
-}
-
-.job_btn_link_hide {
-    color: var(--color-2, whitesmoke);
-    background-color: var(--color-5, grey);
-}
-
-
-/*******  記事投稿フォームについて  *******/        
-.form_job_row {
-    border-bottom: solid 1px var(--color-4, grey);
-}
-
-.form_job_row th {
-    padding: 10px 30px;
-    text-align: left;
-    border-bottom: solid 1px var(--color-3, whitesmoke);
-    background-color: var(--color-4, grey);
-}
-
-.form_job_row label {
-    color: var(--color-1, whitesmoke);    
-}
-
-.form_job_input {
-    padding: 5px;
-}
-
-#btn_job_container {
-    padding-top: 20px;
-    text-align: center;
-}
-
-.btn_job {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 2rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 15px;
-    color: var(--color-1, whitesmoke);    
-    background-color: var(--color-4, grey);   
-}
-
-#btn_cancel {
-    margin-left: 10px;
-    padding: 10px 20px;
-    border: none;
-    color: var(--color-5, whitesmoke);    
-    background-color: var(--color-2, grey);
-}
-
-
-/*******  ログインフォームについて  *******/
-#form_lead {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-#login_table {
-    margin: 0 auto;
-}
-
-
-/*******  フッターについて  *******/
+/*******  フッター  *******/
 footer {
     text-align: center;
     background-color: var(--color-1, whitesmoke);

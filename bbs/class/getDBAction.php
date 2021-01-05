@@ -25,7 +25,7 @@ class getDBAction
     /**
      ** ログイン情報を取得するクラスメソッド
      */
-    function chkPass($input_username)
+    function getUserInfo($input_username)
     {
         /// post送信されてきたユーザー名がデータベースにあるか検索する ///
         $sql = "SELECT * FROM users WHERE name=?";
@@ -33,7 +33,7 @@ class getDBAction
         $stmt->bindParam(1, $input_username, PDO::PARAM_STR, 10);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
-        return $result['password'];
+        return $result;
     }
     /**
      ** 案件データ一覧の件数をDBから取得するクラスメソッド
@@ -102,7 +102,9 @@ class getDBAction
      */
     function uploadCSV($CSVFile)
     {
-        ///////  CSVをサーバに保存するフロー  ///////
+        // ==================================================
+        // CSVをサーバに保存して、配列データとして取得するフロー
+        // ==================================================
         // var_dump($CSVFile);
         /// ファイルの存在チェック ///
         if (is_uploaded_file($CSVFile['csvfile']['tmp_name'])) {
@@ -134,8 +136,9 @@ class getDBAction
             $errMsg = '・ファイルが選択されていません！';
         }
 
-
-        ///////  配列データをDBに保存するフロー  ///////
+        // ==================================================
+        // 配列データをDBに保存するフロー
+        // ==================================================
         ///////  SQL文作成処理  ///////
         /// 導入文 ///
         $sql = 'INSERT INTO job_info ';
@@ -194,11 +197,10 @@ class getDBAction
             //ロールバック ///
             $this->pdo->rollback();
             /// エラーメッセージ出力 ///
-            // echo "<br>::errorInfo():<br>";
-            // print_r($stmt->errorInfo());
-            $errMsg  = $e->getMessage();
+            // $errMsg  = $e->getMessage();
+            $errMsg  = "データベースに登録ができませんでした！";
         }
-        ///  ///
+        /// エラーメッセージがある場合は結果に返す ///
         if ($errMsg) {
             $msg = $errMsg;
         }

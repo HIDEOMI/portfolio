@@ -1,33 +1,35 @@
 <?php
-///////  ログインについて認証する処理  ///////
-require_unlogined_session();
+// ==================================================
+// ログイン関連のイベントについてのPHP
+// ==================================================
+// require_unlogined_session();
 
-/// 事前の諸々確認 ///
-/// イベント【loginChk】かつPOSTメソッドのときのみ実行する ///
-if (($event === "loginChk")  && ($_SERVER['REQUEST_METHOD'] === 'POST')) {
-    $message = "";
-    /// ユーザー名またはパスワードが送信されて来なかった場合はエラーメッセージを表示して終了する ///
+if ($event === "loginChk") {
+    // ==================================================
+    // ログインの確認フロー
+    // ==================================================
     if (empty($_POST["username"]) || empty($_POST["password"])) {
+        /// ユーザー名またはパスワードが送信されて来なかった場合はエラーメッセージを表示して終了する ///
         $message = "ユーザー名とパスワードを入力してください";
     } else {
         /// ユーザ名とパスワードが送信されてきた場合 ///
-
         ///////  ユーザ情報について認証するフロー  ///////
-        /// ユーザから受け取ったユーザ名とパスワードと保存されたトークン（セッションID） ///
+        /// ユーザから受け取ったユーザ名とパスワード ///
         $input_username = filter_input(INPUT_POST, 'username');
         $input_password = filter_input(INPUT_POST, 'password');
-        $token = filter_input(INPUT_POST, 'token');
-        $result_password = $action->chkPass($input_username);
+        $user_data = $action->getUserInfo($input_username);
+        $result_password = $user_data['password'];
+        $admin_info = $user_data['admin'];
 
-        /// トークンとユーザパスワードをそれぞれチェック ///
-        if ((validate_token($token)) && validate_password($input_password, $result_password)) {
+        /// パスワードをチェック ///
+        if (validate_password($input_password, $result_password)) {
             /// 認証が成功したとき ///
             session_regenerate_id(true);  /// セッションIDの追跡を防ぐためにセッションID再発行
             /// ユーザ名をセット ///
             $_SESSION['username'] = $input_username;
             /// 管理者情報をセット ///
-            // 
-            /// ログイン完了後にトップページに遷移 ///
+            $_SESSION['adminUser'] = $admin_info;
+            /// index.php に遷移 ///
             header('Location: ./index.php');
             exit;
         } else {
@@ -36,10 +38,19 @@ if (($event === "loginChk")  && ($_SERVER['REQUEST_METHOD'] === 'POST')) {
             http_response_code(403);
         }
     }
+} elseif ($event === "logout") {
+    // セッション用Cookieの破棄
+    setcookie(session_name(), '', 1);
+    // セッションファイルの破棄
+    session_destroy();
+    /// index.php に遷移 ///
+    header('Location: ./index.php');
+    exit;
 }
 
 $message = h($message);
 ?>
+
 
 <div id="main_container">
     <div id="form_lead">
@@ -75,7 +86,6 @@ $message = h($message);
             </tbody>
         </table>
         <div id="btn_job_container">
-            <input type="hidden" name="token" value="<?= h(generate_token()) ?>">
             <button type="submit" class="btn_job" id="btn_upload" name="event_id" value="loginChk">ログイン</button>
             <a href="./index.php" class="btn_job" id="btn_cancel">キャンセル</a>
         </div>

@@ -8,9 +8,6 @@ require_logined_session();
     <h4>
         <?php
         echo $result_msg;
-        // echo $asins;
-        // var_dump($asins);
-        // echo "<br>";
         ?>
     </h4>
     <p>・案件データを保存したCSVファイルをアップロードします</p>

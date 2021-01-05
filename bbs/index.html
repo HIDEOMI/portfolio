@@ -7,8 +7,9 @@
 
     <!-- 基本のCSS -->
     <link rel="stylesheet" href="./css/common.css">
+    <link rel="stylesheet" href="./css/contents.css">
     <title>
-        パーソル案件閲覧クン | ログインページ </title>
+        パーソル案件閲覧クン | 案件一覧 </title>
 </head>
 
 <!-- ページ開始 -->
@@ -29,18 +30,10 @@
                 </div>
             </div>
             <div id="header_link">
-                <!-- <a href="">新規登録</a> -->
-                <!-- <a href="">ログイン</a> -->
                 <form action="./index.php" method="post" id="header_form">
                     <ul id="header_list">
                         <li>
-                            <button type="sunmit" class="header_btn" name="event_id" value="form">記事投稿</button>
-                        </li>
-                        <li>
-                            <button type="sunmit" class="header_btn" name="event_id" value="upload">アップロード</button>
-                        </li>
-                        <li>
-                            <button type="sunmit" class="header_btn" name="event_id" value="sign_up">新規登録</button>
+                            <button type="sunmit" class="header_btn" name="event_id" value="signUp">新規登録</button>
                         </li>
                         <li>
                             <button type="sunmit" class="header_btn" name="event_id" value="login">ログイン</button>
@@ -54,63 +47,107 @@
     <!-- ページ見出し開始 -->
     <div id="page_header_wrapper">
         <div id="page_header_container">
-            <h2 id="page_header_title">
-                ログインページ </h2>
+            <h2 id="page_header_title">案件一覧</h2>
+            <div id="page_header_right">
+                <h2 id="page_header_msg">ようこそ！</h2>
+                <!-- <p>ログインはこちら！</p> -->
+            </div>
         </div>
     </div>
 
     <!-- メインコンテンツ開始 -->
-    <div id="main_wrapper">
+    <ul id="job_card_container">
 
-        login<br>
-        <div id="main_container">
+        <!-- 案件カードについて -->
+        <div class="job_card">
+            <li>
+                <div class="job_top">
+                    <h3 class="job_title">
+                        <a
+                            href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-Z201207812-IT">【赤坂見附】キャッシュレス決済の基盤システム構築</a>
+                    </h3>
+                    <div class="job_status">
+                        <p class="job_status_item">新規</p>
+                        <p class="job_status_item">お気に入り</p>
+                        <p class="job_num">お仕事No: I-Z201207812-IT</p>
+                    </div>
+                    <div class="job_lead">＜キャッシュレス決済の基盤システム構築案件＞
 
-            <!-- ログインフォーム開始 -->
-            <form action="./index.php" method="post" role="form">
-                <table id="login_table">
-                    <tbody>
-                        <tr id="row_job_title" class="form_job_row">
-                            <th>
-                                <label>ユーザー名</label>
-                            </th>
-                            <td>
-                                <input type="text" name="user_pass" class="form_job_input" placeholder="パスワード"
-                                    required />
-                            </td>
-                        </tr>
-                        <tr id="row_job_number" class="form_job_row">
-                            <th>
-                                <label>パスワード</label>
-                            </th>
-                            <td>
-                                <input type="text" name="user_name" class="form_job_input" placeholder="ユーザー名"
-                                    required />
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div id="btn_job_container">
-                    <button type="submit" class="btn_job" id="btn_upload" name="event_id" value="session">ログイン</button>
-                    <a href="./index.php" class="btn_job" id="btn_cancel">キャンセル</a>
+                        【詳細】
+                        自社で提供している決済システム（SaaS）にてシステム基盤構築を行っているプロジェクトへの参画となります。
+                        グループ会社とも共同して進めているプロジェクトです。
+
+                        【工程】詳細設計～テスト
+
+                        【環境】
+                        Cisco Nexus 9300、FortiGate-500E、FortiGate-300E、BIG-IP i2600 LTM
+
+                        【期間】2021年5月末までのご就業予定です。※延長の可能性があります。
+
+                        【備考】
+                        データセンター（東京）での作業を場合によっては一部お願いする可能性があります。</div>
                 </div>
-            </form>
-            <!-- 案件投稿フォーム終了 -->
-
+                <div class="job_middle">
+                    <table class="job_table">
+                        <tbody>
+                            <tr class="job_table_row">
+                                <th class="job_table_row_head">案件種別</th>
+                                <td class="job_table_row_data">派遣</td>
+                            </tr>
+                            <tr class="job_table_row">
+                                <th class="job_table_row_head">職種</th>
+                                <td class="job_table_row_data">ネットワーク・サーバーエンジニア</td>
+                            </tr>
+                            <tr class="job_table_row">
+                                <th class="job_table_row_head">給与</th>
+                                <td class="job_table_row_data">時給2500円</td>
+                            </tr>
+                            <tr class="job_table_row">
+                                <th class="job_table_row_head">勤務地</th>
+                                <td class="job_table_row_data">東京都 千代田区<br />
+                                    赤坂見附駅より徒歩3分<br />
+                                    永田町駅より徒歩3分<br />
+                                    ※パーソルテクノロジースタッフは、全てのお仕事で通勤交通費を支給！</td>
+                            </tr>
+                            <tr class="job_table_row">
+                                <th class="job_table_row_head">勤務時間</th>
+                                <td class="job_table_row_data">(1)09:00～17:30(実働時間07時間30分)<br />
+                                    【残業】月20～30時間程度</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="job_middle_right">
+                        <p class="job_tips_title">おすすめポイント</p>
+                        <p class="job_tips">◆通勤交通費別途支給（月額上限5万円／最安経路）※当社規定あり<br />
+                            ◆複数路線から通勤可、好立地オフィス<br />
+                            ◆駅から徒歩5分以内</p>
+                    </div>
+                </div>
+                <div class="job_bottom">
+                    <div class="job_btn_container">
+                        <button class="job_btn">
+                            <a class="job_btn_link_favorite" href="">お気に入りに追加</a>
+                        </button>
+                        <button class="job_btn">
+                            <a class="job_btn_link_detail"
+                                href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-Z201207812-IT">求人の詳細を見る</a>
+                        </button>
+                        <button class="job_btn">
+                            <a class="job_btn_link_hide" href="">非表示にする</a>
+                        </button>
+                    </div>
+                </div>
+            </li>
         </div>
+
+    </ul>
+
+    <div id="footer_middle">
+        <p>フッターミドル</p>
     </div>
-    <!-- メインコンテンツ終了 -->
-
-    <!-- フッター開始 -->
-    <footer>
-        <div id="footer_top">
-            <p>フッタートップ</p>
-        </div>
-        <div id="footer_middle">
-            <p>フッターミドル</p>
-        </div>
-        <div id="footer_bottom">
-            フッターボトム
-        </div>
+    <div id="footer_bottom">
+        フッターボトム
+    </div>
     </footer>
     <!-- フッター終了 -->
 </body>

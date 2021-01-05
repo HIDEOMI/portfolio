@@ -14,12 +14,17 @@
         <div id="header_link">
             <form action="./index.php" method="post" id="header_form">
                 <ul id="header_list">
-                    <?php if (isset($_SESSION['username'])) : ?>
+                    <?php if ($_SESSION['adminUser'] == true) : ?>
                         <li>
                             <button type="sunmit" class="header_btn" name="event_id" value="form">記事投稿</button>
                         </li>
                         <li>
                             <button type="sunmit" class="header_btn" name="event_id" value="upload">アップロード</button>
+                        </li>
+                    <?php endif; ?>
+                    <?php if (isset($_SESSION['username'])) : ?>
+                        <li>
+                            <button type="sunmit" class="header_btn" name="event_id" value="">お気に入り</button>
                         </li>
                         <li>
                             <button type="sunmit" class="header_btn" name="event_id" value="logout">ログアウト</button>
