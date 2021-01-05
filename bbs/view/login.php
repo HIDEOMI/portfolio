@@ -25,6 +25,8 @@ if (($event === "loginChk")  && ($_SERVER['REQUEST_METHOD'] === 'POST')) {
             session_regenerate_id(true);  /// セッションIDの追跡を防ぐためにセッションID再発行
             /// ユーザ名をセット ///
             $_SESSION['username'] = $input_username;
+            /// 管理者情報をセット ///
+            // 
             /// ログイン完了後にトップページに遷移 ///
             header('Location: ./index.php');
             exit;
