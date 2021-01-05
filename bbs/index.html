@@ -1,0 +1,363 @@
+<!------   HTML 開始   ------>
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+
+    <!-- 基本のCSS -->
+    <link rel="stylesheet" href="./css/common.css">
+    <title>
+        パーソル案件閲覧クン | 案件一覧 </title>
+</head>
+
+<!-- ページ開始 -->
+
+<body>
+
+    <!-- ヘッダー開始 -->
+    <header>
+        <div id="header_container">
+            <div id="header_logo">
+                <p id="logo_top">※非公式※</p>
+                <h1>
+                    <a href="">パーソル案件閲覧クン</a>
+                </h1>
+                <div id="logo_bottom">
+                    <p id>パーソルの案件を個人で管理しやすくするためのWEBアプリです</p>
+                    <p id>※記事内容は参考であり実際の内容と異なる場合があります</p>
+                </div>
+            </div>
+            <div id="header_link">
+                <!-- <a href="">新規登録</a> -->
+                <!-- <a href="">ログイン</a> -->
+                <form action="./index.php" method="post" id="header_form">
+                    <ul id="header_list">
+                        <li>
+                            <button type="sunmit" class="header_btn" name="event_id" value="signUp">新規登録</button>
+                        </li>
+                        <li>
+                            <button type="sunmit" class="header_btn" name="event_id" value="login">ログイン</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+        </div>
+    </header>
+    <!-- ヘッダー終了 -->
+    <!-- ページ見出し開始 -->
+    <div id="page_header_wrapper">
+        <div id="page_header_container">
+            <h2 id="page_header_title">案件一覧</h2>
+            <br>
+            <div id="page_header_right">
+                <h2 id="page_header_msg">ようこそ</h2>
+                <!-- <p>ログインはこちら！</p> -->
+            </div>
+        </div>
+    </div>
+
+    <!-- メインコンテンツ開始 -->
+    <div id="main_wrapper">
+
+        <br><!-- 案件コンテンツ開始 -->
+        <div id="#job_card_wrapper">
+
+            <!-- 案件ヘッダー開始 -->
+            <div id="main_top_container">
+
+                <!-- ページソート -->
+                <div class="job_sort">
+                    <p class="job_sort_number">
+                        10 <span>件</span>
+                    </p>
+                    <ul class="job_sort_list">
+                        <li class="job_sort_item">
+                            <p class="job_sort_label">並び順</p>
+                            <select class="job_sort_select" name="" id="sortType">
+                                <option value="">新着順</option>
+                                <option value="">給与順</option>
+                            </select>
+                        </li>
+                        <li class="job_sort_item">
+                            <p class="job_sort_label">表示件数</p>
+                            <select class="job_sort_select" name="" id="displayCount">
+                                <option value="">10件</option>
+                                <option value="">50件</option>
+                                <option value="">100件</option>
+                            </select>
+                        </li>
+                    </ul>
+                </div>
+                <!-- ページネイション -->
+                <ul class="pagination_list">
+                    <li class="pagination_item">
+                        <a class="pagination_link" href="">最初</a>
+                    </li>
+                    <li class="pagination_item">
+                        <a class="pagination_link" href="">前</a>
+                    </li>
+                    <li class="pagination_item">
+                        <a class="pagination_link" href="">1</a>
+                    </li>
+                    <li class="pagination_item">
+                        <a class="pagination_link" href="">2</a>
+                    </li>
+                    <li class="pagination_item">
+                        <a class="pagination_link" href="">3</a>
+                    </li>
+                    <li class="pagination_item">
+                        <a class="pagination_link" href="">4</a>
+                    </li>
+                    <li class="pagination_item">
+                        <a class="pagination_link" href="">5</a>
+                    </li>
+                    <li class="pagination_item">
+                        <p>...</p>
+                    </li>
+                    <li class="pagination_item">
+                        <a class="pagination_link" href="">次</a>
+                    </li>
+                    <li class="pagination_item">
+                        <a class="pagination_link" href="">最後</a>
+                    </li>
+                </ul>
+
+            </div>
+            <!-- 案件ヘッダー終了 -->
+            <!-- 案件一覧開始 -->
+            <ul id="job_card_container">
+
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a href="url_1">タイトル</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201111_010</p>
+                            </div>
+                            <div class="job_lead">＜こんな案件です＞
+
+                                案件の説明です
+
+                                【詳細】
+                                ・詳細です
+                                ・詳細です</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">派遣</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">開発エンジニア</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">時給2000円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 渋谷区<br />
+                                            渋谷駅より徒歩5分</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">(1)09:00～18:00(実働時間08時間)<br />
+                                            【残業】月10時間程度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆おすすめポイント1<br />
+                                    ◆おすすめポイント2<br />
+                                    ◆おすすめポイント3</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_favorite" href="">お気に入りに追加</a>
+                                </button>
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail" href="url_1">求人の詳細を見る</a>
+                                </button>
+                                <button class="job_btn">
+                                    <a class="job_btn_link_hide" href="">非表示にする</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a href="url_1">タイトル</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201111_009</p>
+                            </div>
+                            <div class="job_lead">＜こんな案件です＞
+
+                                案件の説明です
+
+                                【詳細】
+                                ・詳細です
+                                ・詳細です</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">派遣</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">開発エンジニア</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">時給2000円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 渋谷区<br />
+                                            渋谷駅より徒歩5分</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">(1)09:00～18:00(実働時間08時間)<br />
+                                            【残業】月10時間程度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆おすすめポイント1<br />
+                                    ◆おすすめポイント2<br />
+                                    ◆おすすめポイント3</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_favorite" href="">お気に入りに追加</a>
+                                </button>
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail" href="url_1">求人の詳細を見る</a>
+                                </button>
+                                <button class="job_btn">
+                                    <a class="job_btn_link_hide" href="">非表示にする</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a href="url_1">タイトル</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201111_008</p>
+                            </div>
+                            <div class="job_lead">＜こんな案件です＞
+
+                                案件の説明です
+
+                                【詳細】
+                                ・詳細です
+                                ・詳細です</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">派遣</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">開発エンジニア</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">時給2000円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 渋谷区<br />
+                                            渋谷駅より徒歩5分</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">(1)09:00～18:00(実働時間08時間)<br />
+                                            【残業】月10時間程度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆おすすめポイント1<br />
+                                    ◆おすすめポイント2<br />
+                                    ◆おすすめポイント3</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_favorite" href="">お気に入りに追加</a>
+                                </button>
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail" href="url_1">求人の詳細を見る</a>
+                                </button>
+                                <button class="job_btn">
+                                    <a class="job_btn_link_hide" href="">非表示にする</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+
+            </ul>
+            <!-- 案件一覧終了 -->
+
+        </div>
+        <!-- 案件コンテンツ終了 -->
+
+    </div>
+    <!-- メインコンテンツ終了 -->
+    <!-- フッター開始 -->
+    <footer>
+        <div id="footer_top">
+            <p>フッタートップ</p>
+        </div>
+        <div id="footer_middle">
+            <p>フッターミドル</p>
+        </div>
+        <div id="footer_bottom">
+            フッターボトム
+        </div>
+    </footer>
+    <!-- フッター終了 -->
+</body>
+
+</html>
+<!------   HTML 開始   ------>

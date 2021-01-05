@@ -348,62 +348,6 @@ header * {
 }
 
 
-/*******  記事投稿フォームについて  *******/        
-.form_job_row {
-    border-bottom: solid 1px var(--color-4, grey);
-}
-
-.form_job_row th {
-    padding: 10px 30px;
-    text-align: left;
-    border-bottom: solid 1px var(--color-3, whitesmoke);
-    background-color: var(--color-4, grey);
-}
-
-.form_job_row label {
-    color: var(--color-1, whitesmoke);    
-}
-
-.form_job_input {
-    padding: 5px;
-}
-
-#btn_job_container {
-    padding-top: 20px;
-    text-align: center;
-}
-
-.btn_job {
-    margin-top: 10px;
-    padding: 10px 20px;
-    font-size: 2rem;
-    font-weight: bold;
-    border: none;
-    border-radius: 15px;
-    color: var(--color-1, whitesmoke);    
-    background-color: var(--color-4, grey);   
-}
-
-#btn_cancel {
-    margin-left: 10px;
-    padding: 10px 20px;
-    border: none;
-    color: var(--color-5, whitesmoke);    
-    background-color: var(--color-2, grey);
-}
-
-
-/*******  ログインフォームについて  *******/
-#form_lead {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-#login_table {
-    margin: 0 auto;
-}
-
-
 /*******  フッターについて  *******/
 footer {
     text-align: center;
