@@ -1,4 +1,6 @@
-/*******  変数定義  *******/
+/* ================================================== */
+/* 変数定義 */
+/* ================================================== */
 :root {
     --color-1: #f9fbfe;
     --color-2: #e2e2e2;
@@ -11,7 +13,9 @@
     /* --shadow-1: 0 1px 6px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.12); */
 }
 
-/*******  CSSの初期化  *******/
+/* ================================================== */
+/* CSSの初期化 */
+/* ================================================== */
 * {
     /* background-color: var(--color-1, white); */
     padding: 0;
@@ -36,15 +40,15 @@ p {
     font-weight: normal;
 }
 
-
-/***************************/
-/*******  下記メイン  *******/
-/***************************/
-/*******  タグ要素  *******/
+/* ================================================== */
+/* 下記メイン */
+/* ================================================== */
+/* ================================================== */
+/* タグ要素 */
+/* ================================================== */
 html {
     font-size: 10px;
 }
-
 body {
     min-width: 950px;
     background-color: var(--color-2, grey);
@@ -52,32 +56,28 @@ body {
 span {
     font-size: 2rem;
 }
-
 h1, h1 * {
     font-size: 5.6rem;
 }
-
 h2, h2 * {
     font-size: 4rem;
 }
-
 h3, h3 * {
     font-size: 2.5rem;
 }
 button {
     border: none;
 }
-
-/*******  ヘッダー  *******/
+/* ================================================== */
+/* ヘッダー */
+/* ================================================== */
 header {
     height: 200px;
     background-color: var(--color-4, blue);
 }
-
 header * {
     color: var(--color-1, whitesmoke);
 }
-
 #header_container {
     display: flex;
     max-width: 1100px;
@@ -89,12 +89,10 @@ header * {
 #header_logo {
     display: inline-block;
 }
-
 #logo_top {
     font-weight: bold;
     color: orange;
 }
-
 #logo_bottom {
     padding-left: 20px;
 }
@@ -103,17 +101,14 @@ header * {
 #header_link {
     margin: 0 0 0 auto;
 }
-
 #header_form {
     margin-top: 30px;
     /* height: 100%; */
 }
-
 #header_list {
     /* height: 100%; */
     display: flex;
 }
-
 .header_btn {
     margin-left: 2px;
     padding: 7px;
@@ -124,12 +119,13 @@ header * {
     background-color: var(--color-3, grey);
 }
 
-/*******  ページ見出し  *******/
+/* ================================================== */
+/* ページ見出し */
+/* ================================================== */
 #page_header_wrapper {
     height: 100px;
     background-color: var(--color-1, whitesmoke);
 }
-
 #page_header_container {
     max-width: 1000px;
     height: 100%;
@@ -139,20 +135,20 @@ header * {
 #page_header_title {
     display: inline-block;
 }
-
 #page_header_right {
     float: right;
     text-align: center;
     margin: 0 auto;
 }
 
-/*******  メインコンテンツ全体  *******/
+/* ================================================== */
+/* メインコンテンツ全体 */
+/* ================================================== */
 #main_wrapper {    
     min-width: 900px;
     width: 950px;
     margin: 0 auto;
 }
-
 #main_container {
     width: 900px;
     padding: 40px 40px 25px 60px;
@@ -163,23 +159,54 @@ header * {
     background-color: var(--color-1, whitesmoke);
 }
 
-/*******  フッター  *******/
+/* ================================================== */
+/* フッター */
+/* ================================================== */
 footer {
     text-align: center;
     background-color: var(--color-1, whitesmoke);
 }
-
 #footer_top {
     height: 60px;
 }
-
 #footer_middle {
     height: 200px;
 }
-
 #footer_bottom {
     display: block;
     height: 100px;
     color: var(--color-2, whitesmoke);
     background-color: var(--color-4, grey);
+}
+/* ================================================== */
+/* ポップアップメッセージ */
+/* ================================================== */
+#flash_window_wrapper {
+    z-index: 1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    animation: fadein-keyframes 1.5s ease 0s 1 forwards;
+    /* visibility: hidden; */
+}
+#flash_window {
+    display: inline-block;
+    padding: 40px;
+    margin: 0 auto;
+    border-radius: 9px;
+    border: solid 4px var(--color-7, orange);
+    background-color: var(--color-1, white);
+}
+#flash_msg {
+    font-size: 3rem;
+    font-weight: bold;
+    color: var(--color-5, black);
+}
+@keyframes fadein-keyframes {
+    0% {opacity: 1;}
+    80% {opacity: 1;}
+    100% {opacity: 0;}
 }

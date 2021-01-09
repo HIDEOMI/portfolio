@@ -8,8 +8,7 @@
     <!-- 基本のCSS -->
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/contents.css">
-    <title>
-        パーソル案件閲覧クン | 案件一覧 </title>
+    <title>パーソル案件閲覧クン | 案件一覧</title>
 </head>
 
 <!-- ページ開始 -->
@@ -22,24 +21,25 @@
             <div id="header_logo">
                 <p id="logo_top">※非公式※</p>
                 <h1>
-                    <a href="">パーソル案件閲覧クン</a>
+                    <a href="./index.php">パーソル案件閲覧クン</a>
                 </h1>
                 <div id="logo_bottom">
-                    <p id>パーソルの案件を個人で管理しやすくするためのWEBアプリです</p>
-                    <p id>※記事内容は参考であり実際の内容と異なる場合があります</p>
+                    <p>パーソルの案件を個人で管理しやすくするためのWEBアプリです</p>
+                    <p>※記事内容は参考であり実際の内容と異なる場合があります</p>
                 </div>
             </div>
             <div id="header_link">
-                <form action="./index.php" method="post" id="header_form">
-                    <ul id="header_list">
-                        <li>
-                            <button type="sunmit" class="header_btn" name="event_id" value="signUp">新規登録</button>
-                        </li>
-                        <li>
-                            <button type="sunmit" class="header_btn" name="event_id" value="login">ログイン</button>
-                        </li>
-                    </ul>
-                </form>
+                <ul id="header_list">
+                    <form action="./index.php" method="POST" id="header_form">
+                        <ul id="header_list">
+                            <li>
+                                <button type="sunmit" class="header_btn" name="event_id" value="signUp">新規登録</button>
+                            </li>
+                            <li>
+                                <button type="sunmit" class="header_btn" name="event_id" value="login">ログイン</button>
+                            </li>
+                        </ul>
+                    </form>
             </div>
         </div>
     </header>
@@ -49,108 +49,931 @@
         <div id="page_header_container">
             <h2 id="page_header_title">案件一覧</h2>
             <div id="page_header_right">
-                <h2 id="page_header_msg">ようこそ！</h2>
+                <h2 id="page_header_msg">サaイトへようこそ！</h2>
                 <!-- <p>ログインはこちら！</p> -->
             </div>
         </div>
     </div>
 
     <!-- メインコンテンツ開始 -->
-    <ul id="job_card_container">
+    <div id="main_wrapper">
 
-        <!-- 案件カードについて -->
-        <div class="job_card">
-            <li>
-                <div class="job_top">
-                    <h3 class="job_title">
-                        <a
-                            href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-Z201207812-IT">【赤坂見附】キャッシュレス決済の基盤システム構築</a>
-                    </h3>
-                    <div class="job_status">
-                        <p class="job_status_item">新規</p>
-                        <p class="job_status_item">お気に入り</p>
-                        <p class="job_num">お仕事No: I-Z201207812-IT</p>
-                    </div>
-                    <div class="job_lead">＜キャッシュレス決済の基盤システム構築案件＞
+        <br><!-- 案件コンテンツ開始 -->
+        <div id="#job_card_wrapper">
 
-                        【詳細】
-                        自社で提供している決済システム（SaaS）にてシステム基盤構築を行っているプロジェクトへの参画となります。
-                        グループ会社とも共同して進めているプロジェクトです。
+            <!-- 案件ヘッダー開始 -->
+            <div id="main_top_container">
 
-                        【工程】詳細設計～テスト
-
-                        【環境】
-                        Cisco Nexus 9300、FortiGate-500E、FortiGate-300E、BIG-IP i2600 LTM
-
-                        【期間】2021年5月末までのご就業予定です。※延長の可能性があります。
-
-                        【備考】
-                        データセンター（東京）での作業を場合によっては一部お願いする可能性があります。</div>
+                <!-- ページソート -->
+                <div class="job_sort">
+                    <p class="job_sort_number">
+                        100<span>件</span>
+                    </p>
+                    <form action="./index.php" method="GET" role="form" class="job_sort_form">
+                        <ul class="job_sort_list">
+                            <li class="job_sort_item">
+                                <p class="job_sort_label">並び順</p>
+                                <select class="job_sort_select" name="sort_type" onchange="submit()">
+                                    <option value="new">新着順</option>
+                                    <option value="wage">給与順</option>
+                                </select>
+                            </li>
+                            <li class="job_sort_item">
+                                <p class="job_sort_label">表示件数</p>
+                                <select class="job_sort_select" name="display_count" onchange="submit()">
+                                    <option value="10">10件</option>
+                                    <option value="50">50件</option>
+                                    <option value="100">100件</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </form>
                 </div>
-                <div class="job_middle">
-                    <table class="job_table">
-                        <tbody>
-                            <tr class="job_table_row">
-                                <th class="job_table_row_head">案件種別</th>
-                                <td class="job_table_row_data">派遣</td>
-                            </tr>
-                            <tr class="job_table_row">
-                                <th class="job_table_row_head">職種</th>
-                                <td class="job_table_row_data">ネットワーク・サーバーエンジニア</td>
-                            </tr>
-                            <tr class="job_table_row">
-                                <th class="job_table_row_head">給与</th>
-                                <td class="job_table_row_data">時給2500円</td>
-                            </tr>
-                            <tr class="job_table_row">
-                                <th class="job_table_row_head">勤務地</th>
-                                <td class="job_table_row_data">東京都 千代田区<br />
-                                    赤坂見附駅より徒歩3分<br />
-                                    永田町駅より徒歩3分<br />
-                                    ※パーソルテクノロジースタッフは、全てのお仕事で通勤交通費を支給！</td>
-                            </tr>
-                            <tr class="job_table_row">
-                                <th class="job_table_row_head">勤務時間</th>
-                                <td class="job_table_row_data">(1)09:00～17:30(実働時間07時間30分)<br />
-                                    【残業】月20～30時間程度</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="job_middle_right">
-                        <p class="job_tips_title">おすすめポイント</p>
-                        <p class="job_tips">◆通勤交通費別途支給（月額上限5万円／最安経路）※当社規定あり<br />
-                            ◆複数路線から通勤可、好立地オフィス<br />
-                            ◆駅から徒歩5分以内</p>
-                    </div>
-                </div>
-                <div class="job_bottom">
-                    <div class="job_btn_container">
-                        <button class="job_btn">
-                            <a class="job_btn_link_favorite" href="">お気に入りに追加</a>
-                        </button>
-                        <button class="job_btn">
-                            <a class="job_btn_link_detail"
-                                href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-Z201207812-IT">求人の詳細を見る</a>
-                        </button>
-                        <button class="job_btn">
-                            <a class="job_btn_link_hide" href="">非表示にする</a>
-                        </button>
-                    </div>
-                </div>
+                <!-- ページネイション -->
+                <form action="./index.php" method="GET" role="form" class="pagination_form">
+                    <ul class="pagination_list">
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=1">最初</a>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=6"">前</a>
             </li>
+                            <li class=" pagination_item">
+                                <p>...</p>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=5">5</a>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=6">6</a>
+                        </li>
+                        <li class="pagination_item">
+                            <a id="pagination_selected" class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=7">7</a>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=8">8</a>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=9">9</a>
+                        </li>
+                        <li class="pagination_item">
+                            <p>...</p>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=8">次</a>
+                        </li>
+                        <li class=" pagination_item">
+                            <a class="pagination_link"
+                                href="http://54.64.249.158/portfolio/bbs/index.php?page=10">最後</a>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <!-- 案件ヘッダー終了 -->
+            <!-- 案件一覧開始 -->
+            <ul id="job_card_container">
+
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a
+                                    href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201206577-IT">【フルリモートワーク】社内NW・SV監視、障害対応</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201206577-IT</p>
+                            </div>
+                            <div class="job_lead">＜社内ネットワークの監視/障害対応およびサーバー監視＞
+
+                                【詳細】
+                                情報システム部所属のネットワーク管理責任者の下で以下業務に従事いただきます。
+                                ・社内ネットワーク(拠点数約50拠点)の日常維持管理
+                                ・社内ネットワークの障害監視、障害発生時の緊急対応(一部ベンターが対応)
+                                ・無線及び有線LAN関連の業務
+                                ・リモートワークの環境の展開維持、メンテナンス(VPN設定及びSIM配布)
+                                ・AWS環境の監視
+
+                                【環境】
+                                WindowsServer、AWS、Cisco
+
+                                【体制】
+                                2名＋今回募集の方
+
+                                【備考】
+                                稀に現場作業、夜間作業があります。</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">派遣</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">ネットワーク・サーバーエンジニア</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">時給2100円～時給2300円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 港区<br />
+                                            六本木駅より徒歩2分<br />
+                                            ※パーソルテクノロジースタッフは、全てのお仕事で通勤交通費を支給！</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">(1)09:00～17:45(実働時間07時間45分)<br />
+                                            【残業】月20～30時間程度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆フルリモートワーク相談可<br />
+                                    ◆NW監視またはSV監視経験活かせる</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail"
+                                        href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201206577-IT">求人の詳細を見る</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a
+                                    href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205800-IT">【フルリモートワーク】ビューティコスメのAndroid版開発</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201205800-IT</p>
+                            </div>
+                            <div class="job_lead">＜顧客先常駐でのご就業です＞
+                                一般ユーザー向け、店舗向けのビューティコスメのAndroid版開発
+
+                                【詳細】
+                                既存でのAndroid版アプリはありますが、大きく改修が入るためほぼ新規開発となるためのプロジェクトとなります。
+                                ユーザー向けのページも店舗向けの管理ページも幅広く開発となる予定です。
+
+                                【工程】
+                                要件定義～開発業務～テスト
+                                簡易的な要件定義書はありますが、簡易的なものなのでそこから読み解き詳細設計などへ移せる、
+                                また、必要に応じて要件定義も対応いただける方
+
+                                【環境】Kotlin</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">派遣</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">開発エンジニア</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">時給2400円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 千代田区<br />
+                                            東京駅より徒歩2分<br />
+                                            ※パーソルテクノロジースタッフは、全てのお仕事で通勤交通費を支給！</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">(1)10:00～19:00(実働時間08時間)<br />
+                                            【残業】月10～20時間程度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆10時開始<br />
+                                    ◆フルリモートワーク相談可</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail"
+                                        href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205800-IT">求人の詳細を見る</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a
+                                    href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205705-IT">【大手SI企業】テレビ会社向けのサーバー構築プロジェクト</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201205705-IT</p>
+                            </div>
+                            <div class="job_lead">大手SI企業にてケーブルTV会社向けにサーバー構築／運用業務をご担当していただきます。
+
+                                【詳細】
+                                ・VMwareでの設計構築
+                                ・ストレージの設計構築
+                                ・シェルの作成
+
+                                【環境】
+                                VMware、Linux、RHEL、RedHat Cluster
+
+                                【備考】
+                                ・不定期で夜間対応や休日リモートワーク対応あり
+                                ・不定期で顧客先へ外出する可能性あり</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">派遣</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">ネットワーク・サーバーエンジニア</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">時給2400円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 港区<br />
+                                            お台場海浜公園駅より徒歩3分<br />
+                                            東京テレポート駅より徒歩5分<br />
+                                            ※パーソルテクノロジースタッフは、全てのお仕事で通勤交通費を支給！</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">(1)09:30～18:00(実働時間07時間30分)<br />
+                                            【残業】月10～20時間程度<br />
+                                            （残業補足：通常は月10-20時間程度です。繁忙期によって20時間以上になる可能性があります。）</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆通勤交通費別途支給（月額上限5万円／最安経路）※当社規定あり<br />
+                                    ◆駅から徒歩5分以内<br />
+                                    ◆派遣スタッフ就業中<br />
+                                    ◆複数路線から通勤可、好立地オフィス<br />
+                                    ◆大手SI企業勤務<br />
+                                    ◆2月スタート</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail"
+                                        href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205705-IT">求人の詳細を見る</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a
+                                    href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205637-IT">【リモートワーク可】データ解析・解析用のプログラム改修</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201205637-IT</p>
+                            </div>
+                            <div class="job_lead">データの解析・分析経験を活かして、官公庁や研究機関向けデータ解析、または解析用のプログラム改修を担当していただきます。
+
+                                【詳細】
+                                解析用のプログラム一式は、既にありますが、プログラムのフローを理解して、一部改修、顧客要望に沿った機能調整が必要です。得られたデータに対する解釈/説明についても対応をしていただきます。
+
+                                【工程】開発～運用
+
+                                【技術環境】Fortran
+
+                                【体制】2～3名（業務を担当しているメンバーと一緒に作業、メンバーは他業務を兼任しています）
+
+                                【備考】
+                                ・現在リモートワーク推奨のため、出社は週に3回程度を想定しています。</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">派遣</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">開発エンジニア</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">時給2100円～時給2300円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 豊島区<br />
+                                            池袋駅より徒歩11分<br />
+                                            東池袋駅より徒歩6分<br />
+                                            ※パーソルテクノロジースタッフは、全てのお仕事で通勤交通費を支給！</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">(1)09:15～17:15(実働時間07時間)<br />
+                                            【残業】月5～15時間程度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆通勤交通費別途支給（月額上限5万円／最安経路）※当社規定あり<br />
+                                    ◆リモートワーク相談可<br />
+                                    ◆時短（6時間以下勤務）相談可<br />
+                                    ◆週4日以下相談可<br />
+                                    ◆開始日相談可<br />
+                                    ◆複数名募集</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail"
+                                        href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205637-IT">求人の詳細を見る</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a
+                                    href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205635-IT">【PHP】リモートワーク相談可＊自社セキュリティ製品の開発</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201205635-IT</p>
+                            </div>
+                            <div class="job_lead">ネットワークインテグレーターにて、ビジネス向けセキュリティ製品の開発をお任せします。
+
+                                【詳細】
+                                マルチプラットフォームに対応した自社セキュリティ製品のPHP開発をお願いします。
+                                スマートフォンやタブレットなどのモバイルデバイスが対象です。
+                                SE/PGとして、開発に携わっていただきます。
+
+                                【工程】
+                                調査、設計、開発
+
+                                【環境】
+                                PHP、JavaScript、Apache、IIS、MySQL、SQLServer、Git、Backlog、Azure、AWS
+
+                                【備忘】
+                                基本的に出社での勤務となりますが、週1回程度は在宅勤務の予定</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">派遣</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">開発エンジニア</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">時給2250円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 港区<br />
+                                            竹芝駅より徒歩4分<br />
+                                            浜松町駅より徒歩12分<br />
+                                            ※パーソルテクノロジースタッフは、全てのお仕事で通勤交通費を支給！</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">(1)10:00～19:00(実働時間08時間)<br />
+                                            【残業】月10～20時間程度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆通勤交通費別途支給（月額上限5万円／最安経路）※当社規定あり<br />
+                                    ◆駅から徒歩5分以内<br />
+                                    ◆リモートワーク相談可<br />
+                                    ◆10時開始<br />
+                                    ◆PHP開発経験活かせる</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail"
+                                        href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205635-IT">求人の詳細を見る</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a
+                                    href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205598-IT">【勝どき】フルリモート可＊インフラ環境の構築、運用保守</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201205598-IT</p>
+                            </div>
+                            <div class="job_lead">半導体装置メーカーにて、自社及びグループ企業のインフラ環境の運用保守をお任せします。
+                                【詳細】
+                                詳細設計から構築、導入、運用設計をメインでお任せする予定ですが、希望により設計フェーズからお任せすることも可能。
+                                ユーザーによって環境は異なりますが、物理5台/仮想20台程度の規模の案件が多い。
+                                サーバ用途：アプリ、DNS、メール、ファイル等
+                                ドキュメント：詳細設計書、パラメータシート＆テスト手順書作成
+                                ※月1回程度で夜間対応をお願いする可能性有
+                                【工程】
+                                構築～運用設計
+                                【環境】
+                                Windows Server、Linux、VMware、Hyper-V、Cisco、YAMAHA</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">派遣</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">ネットワーク・サーバーエンジニア</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">時給2350円～時給2600円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 中央区<br />
+                                            勝どき駅より徒歩8分<br />
+                                            月島駅より徒歩10分<br />
+                                            ※パーソルテクノロジースタッフは、全てのお仕事で通勤交通費を支給！</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">(1)09:00～17:30(実働時間07時間45分)<br />
+                                            【残業】月15～25時間程度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆開始日相談可<br />
+                                    ◆フルリモートワーク相談可<br />
+                                    ◆派遣スタッフ就業中</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail"
+                                        href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205598-IT">求人の詳細を見る</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a
+                                    href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205572-IT">【大手通信企業】自社基地局の電波発射に関する作業指示・調整等</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201205572-IT</p>
+                            </div>
+                            <div class="job_lead">＜自社基地局の電波発射に関する各ベンダーへの作業指示等＞
+
+                                【詳細】
+                                1）基地局の電波発射に関する各ベンダーへの作業指示
+                                ・無線機が電波発射可能なことを確認し、各ベンダーと電波発射作業日を調整
+                                ・現地工事の状況を確認し、各パートナーと各ベンダーの仲介役として電波発射作業を円滑に行う
+
+                                2）自社基地局の電波発射に関する各パートナーとの作業調整
+                                ・各パートナーからの依頼に基づき、DB投入予定日／電波発射予定日を各ベンダーと調整
+                                ・依頼内容に応じて各ベンダーへ作業内容を指示する（取りまとめ業務）
+
+                                【環境】
+                                Aurora　Excel　Access　BEAMS3等</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">派遣</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">回線開通調整・基地局</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">時給2330円～時給2590円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 渋谷区<br />
+                                            新宿駅より徒歩9分<br />
+                                            都庁前駅より徒歩4分<br />
+                                            ※パーソルテクノロジースタッフは、全てのお仕事で通勤交通費を支給！</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">
+                                            (1)09:00～17:30(2)10:00～18:30(3)08:00～16:30(実働時間07時間30分)<br />
+                                            【残業】月10～20時間程度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆通勤交通費別途支給（月額上限5万円／最安経路）※当社規定あり<br />
+                                    ◆1月スタート<br />
+                                    ◆複数路線から通勤可、好立地オフィス<br />
+                                    ◆大手通信企業勤務</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail"
+                                        href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205572-IT">求人の詳細を見る</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a
+                                    href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205491-IT">【リモート相談可】自社製品対応アプリ開発等</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201205491-IT</p>
+                            </div>
+                            <div class="job_lead">自社製品対応アプリ(iOS、Android)開発と外部企業に委託している部分のプロジェクトマネジメントをお任せします。
+
+                                【詳細】
+                                IoT調理家電対応アプリの開発をお願いします。
+
+                                【環境】
+                                PC:Windows/Linux
+                                言語：PHP、Perl、Swift、JavaScript、HTML5、CSS3
+                                データベース：SQLServer
+
+                                【備考】
+                                ・リモートワーク相談可能です。※就業初日～1週間程度は赤坂本社に出社していただきます。
+                                ・直接雇用後の条件についての詳細は面談または職場見学の時にお伝えします。</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">正社員・契約社員</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">開発エンジニア</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">月給353500円～月給770500円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 港区<br />
+                                            赤坂(東京都)駅より徒歩3分<br />
+                                            ※パーソルテクノロジースタッフは、全てのお仕事で通勤交通費を支給！</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">(1)10:00～19:00(実働時間08時間)<br />
+                                            【残業】月15時間程度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆通勤交通費別途支給<br />
+                                    ◆駅から徒歩5分以内<br />
+                                    ◆10時開始<br />
+                                    ◆リモートワーク相談可<br />
+                                    ◆正社員登用あり<br />
+                                    ◆服装自由</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail"
+                                        href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205491-IT">求人の詳細を見る</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a
+                                    href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205441-IT">【リモートワーク相談可】SAP導入PJTでのタスクリーダー</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201205441-IT</p>
+                            </div>
+                            <div class="job_lead">総合電機メーカーにて、SAP導入プロジェクトのタスクリーダーとして課題管理をお任せします。(客先常駐)
+
+                                【詳細】
+                                SAPシステム導入プロジェクトにおける課題管理
+                                ・各チームの進捗の把握、課題の把握、課題のフォロー（Redmineを利用）
+                                ・関連プロジェクトとの調整、チーム間の調整、議事録作成
+                                ・進捗管理方法：ExcelのWBSに予定数、実績数を管理（会議の頻度：週3～5回）
+                                ※課題に対しての計画策定や、権限設定までお任せする可能性あり
+
+                                【工程】課題管理
+
+                                【環境】Windows、SAP HANA
+
+                                【出社頻度】週1～2日在宅/週3～4日出社</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">派遣</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">開発エンジニア</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">時給3000円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 渋谷区<br />
+                                            広尾駅より徒歩10分<br />
+                                            ※パーソルテクノロジースタッフは、全てのお仕事で通勤交通費を支給！</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">(1)09:30～18:00(実働時間07時間45分)<br />
+                                            【残業】月20時間程度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆通勤交通費別途支給（月額上限5万円／最安経路）※当社規定あり<br />
+                                    ◆リモートワーク相談可<br />
+                                    ◆大手総合電機メーカー勤務<br />
+                                    ◆複数名募集<br />
+                                    ◆SAPプロジェクト参加経験活かせる</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail"
+                                        href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205441-IT">求人の詳細を見る</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+                <!-- 案件カードについて -->
+                <div class="job_card">
+                    <li>
+                        <div class="job_top">
+                            <h3 class="job_title">
+                                <a
+                                    href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205363-IT">【フルリモートワーク】自社サービス保守・追加および新機能開発</a>
+                            </h3>
+                            <div class="job_status">
+                                <p class="job_status_item">新規</p>
+                                <p class="job_status_item">お気に入り</p>
+                                <p class="job_num">お仕事No: I-E201205363-IT</p>
+                            </div>
+                            <div class="job_lead">当社がスポーツ団体へ提供しているサービスの保守、追加および新機能開発を行っていただきます。
+
+                                【詳細】
+                                ・新機能開発
+                                ・サービス開発
+                                ・既存サービスの保守、メンテナンス
+
+                                【工程】要件定義から開発、リリースまで
+
+                                【環境】
+                                開発言語：Vue.js
+                                開発フロー：アジャイル開発
+
+                                【体制】3名
+
+                                【備考】
+                                ・最初はレクチャーのため出社いただきますが、キャッチアップ次第でリモートワーク可能となります。
+                                ・興行スケジュールに応じたシフト勤務あり</div>
+                        </div>
+                        <div class="job_middle">
+                            <table class="job_table">
+                                <tbody>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">案件種別</th>
+                                        <td class="job_table_row_data">派遣</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">職種</th>
+                                        <td class="job_table_row_data">開発エンジニア</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">給与</th>
+                                        <td class="job_table_row_data">時給2200円</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務地</th>
+                                        <td class="job_table_row_data">東京都 品川区<br />
+                                            大崎駅より徒歩7分<br />
+                                            ※パーソルテクノロジースタッフは、全てのお仕事で通勤交通費を支給！</td>
+                                    </tr>
+                                    <tr class="job_table_row">
+                                        <th class="job_table_row_head">勤務時間</th>
+                                        <td class="job_table_row_data">(1)10:00～18:30(実働時間07時間30分)<br />
+                                            【残業】月10時間程度</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <div class="job_middle_right">
+                                <p class="job_tips_title">おすすめポイント</p>
+                                <p class="job_tips">◆1月スタート相談可<br />
+                                    ◆フルリモートワーク相談可<br />
+                                    ◆10時開始</p>
+                            </div>
+                        </div>
+                        <div class="job_bottom">
+                            <div class="job_btn_container">
+                                <button class="job_btn">
+                                    <a class="job_btn_link_detail"
+                                        href="https://persol-tech-s.co.jp/jobsearch/workDetail_index.html?job_offer_id=I-E201205363-IT">求人の詳細を見る</a>
+                                </button>
+                            </div>
+                        </div>
+                    </li>
+                </div>
+
+            </ul>
+            <!-- 案件一覧終了 -->
+            <!-- 案件フッターー開始 -->
+            <div id="main_footting_container">
+
+
+                <!-- ページネイション -->
+                <form action="./index.php" method="GET" role="form" class="pagination_form">
+                    <ul class="pagination_list">
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=1">最初</a>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=6"">前</a>
+            </li>
+                            <li class=" pagination_item">
+                                <p>...</p>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=5">5</a>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=6">6</a>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=7">7</a>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=8">8</a>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=9">9</a>
+                        </li>
+                        <li class="pagination_item">
+                            <p>...</p>
+                        </li>
+                        <li class="pagination_item">
+                            <a class="pagination_link" href="http://54.64.249.158/portfolio/bbs/index.php?page=8">次</a>
+                        </li>
+                        <li class=" pagination_item">
+                            <a class="pagination_link"
+                                href="http://54.64.249.158/portfolio/bbs/index.php?page=10">最後</a>
+                        </li>
+                    </ul>
+                </form><!-- ページソート -->
+                <div class="job_sort">
+                    <p class="job_sort_number">
+                        100<span>件</span>
+                    </p>
+                    <form action="./index.php" method="GET" role="form" class="job_sort_form">
+                        <ul class="job_sort_list">
+                            <li class="job_sort_item">
+                                <p class="job_sort_label">並び順</p>
+                                <select class="job_sort_select" name="sort_type" onchange="submit()">
+                                    <option value="new">新着順</option>
+                                    <option value="wage">給与順</option>
+                                </select>
+                            </li>
+                            <li class="job_sort_item">
+                                <p class="job_sort_label">表示件数</p>
+                                <select class="job_sort_select" name="display_count" onchange="submit()">
+                                    <option value="10">10件</option>
+                                    <option value="50">50件</option>
+                                    <option value="100">100件</option>
+                                </select>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+            <!-- 案件フッターー終了 -->
         </div>
-
-    </ul>
-
-    <div id="footer_middle">
-        <p>フッターミドル</p>
+        <!-- 案件コンテンツ終了 -->
     </div>
-    <div id="footer_bottom">
-        フッターボトム
-    </div>
+    <!-- メインコンテンツ終了 -->
+
+    <!-- フッター開始 -->
+    <footer>
+        <div id="footer_top">
+            <p>フッタートップ</p>
+        </div>
+        <div id="footer_middle">
+            <p>フッターミドル</p>
+        </div>
+        <div id="footer_bottom">
+            フッターボトム
+        </div>
     </footer>
     <!-- フッター終了 -->
 </body>
 
 </html>
-<!------   HTML 開始   ------>
+<!------   HTML 終了   ------>

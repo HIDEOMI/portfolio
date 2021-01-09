@@ -17,7 +17,11 @@
     <ul id="job_card_container">
 
         <?php if (!empty($job_datas)) : ?>
-            <?php foreach ($job_datas as $job_row) : ?>
+            <?php
+            // ==================================================
+            // 取得した案件ごとに繰り返す
+            // ==================================================
+            foreach ($job_datas as $job_row) : ?>
                 <!-- 案件カードについて -->
                 <div class="job_card">
                     <li>
@@ -26,8 +30,8 @@
                                 <a href="<?php echo "$job_row[url]"; ?>"><?php echo "$job_row[title]"; ?></a>
                             </h3>
                             <div class="job_status">
-                                <p class="job_status_item">新規</p>
-                                <p class="job_status_item">お気に入り</p>
+                                <!-- <p class="job_status_item">新規</p> -->
+                                <!-- <p class="job_status_item">お気に入り</p> -->
                                 <p class="job_num"><?php echo "お仕事No: $job_row[job_id]"; ?></p>
                             </div>
                             <div class="job_lead"><?php echo "$job_row[description]"; ?></div>
@@ -49,30 +53,38 @@
                                     </tr>
                                     <tr class="job_table_row">
                                         <th class="job_table_row_head">勤務地</th>
-                                        <td class="job_table_row_data"><?php echoSanitizeBr("$job_row[work_location]"); ?></td>
+                                        <td class="job_table_row_data"><?php echo_sanitize_br("$job_row[work_location]"); ?></td>
                                     </tr>
                                     <tr class="job_table_row">
                                         <th class="job_table_row_head">勤務時間</th>
-                                        <td class="job_table_row_data"><?php echoSanitizeBr("$job_row[hours]"); ?></td>
+                                        <td class="job_table_row_data"><?php echo_sanitize_br("$job_row[hours]"); ?></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="job_middle_right">
                                 <p class="job_tips_title">おすすめポイント</p>
-                                <p class="job_tips"><?php echoSanitizeBr("$job_row[tips]"); ?></p>
+                                <p class="job_tips"><?php echo_sanitize_br("$job_row[tips]"); ?></p>
                             </div>
                         </div>
                         <div class="job_bottom">
                             <div class="job_btn_container">
-                                <button class="job_btn">
-                                    <a class="job_btn_link_favorite" href="">お気に入りに追加</a>
-                                </button>
+                                <?php
+                                // ==================================================
+                                // ログイン状況によって表示を変える
+                                // ==================================================
+                                if (isset($_SESSION['username'])) : ?>
+                                    <button class="job_btn">
+                                        <a class="job_btn_link_favorite" href="">お気に入りに追加</a>
+                                    </button>
+                                <?php endif; ?>
                                 <button class="job_btn">
                                     <a class="job_btn_link_detail" href="<?php echo "$job_row[url]"; ?>">求人の詳細を見る</a>
                                 </button>
-                                <button class="job_btn">
-                                    <a class="job_btn_link_hide" href="">非表示にする</a>
-                                </button>
+                                <?php if (isset($_SESSION['username'])) : ?>
+                                    <button class="job_btn">
+                                        <a class="job_btn_link_hide" href="">非表示にする</a>
+                                    </button>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </li>

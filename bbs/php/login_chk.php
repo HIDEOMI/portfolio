@@ -2,7 +2,6 @@
 // ==================================================
 // ログイン関連のイベントについてのPHP
 // ==================================================
-// require_unlogined_session();
 
 if ($event === "loginChk") {
     // ==================================================
@@ -18,17 +17,20 @@ if ($event === "loginChk") {
         $input_username = filter_input(INPUT_POST, 'username');
         $input_password = filter_input(INPUT_POST, 'password');
         $user_data = $action->getUserInfo($input_username);
-        $result_password = $user_data['password'];
-        $admin_info = $user_data['admin'];
 
         /// パスワードをチェック ///
-        if (validate_password($input_password, $result_password)) {
+        if (validate_password($input_password, $user_data['password'])) {
             /// 認証が成功したとき ///
+            // ==================================================
+            // ログイン成功イベント
+            // ==================================================
             session_regenerate_id(true);  /// セッションIDの追跡を防ぐためにセッションID再発行
             /// ユーザ名をセット ///
             $_SESSION['username'] = $input_username;
             /// 管理者情報をセット ///
-            $_SESSION['adminUser'] = $admin_info;
+            $_SESSION['adminUser'] = $user_data['admin'];
+            /// ユーザIDをセット ///
+            $_SESSION['userID'] = $user_data['user_id'];
             /// index.php に遷移 ///
             header('Location: ./index.php');
             exit;
@@ -39,8 +41,12 @@ if ($event === "loginChk") {
         }
     }
 } elseif ($event === "logout") {
+    // ==================================================
+    // ログアウトイベント
+    // ==================================================
     // セッション用Cookieの破棄
     setcookie(session_name(), '', 1);
+    session_unset();
     // セッションファイルの破棄
     session_destroy();
     /// index.php に遷移 ///
@@ -64,7 +70,7 @@ $message = h($message);
     </div>
 
     <!-- ログインフォーム開始 -->
-    <form action="./index.php" method="post" role="form">
+    <form action="./index.php" method="POST" role="form">
         <table id="login_table">
             <tbody>
                 <tr id="row_job_title" class="form_job_row">

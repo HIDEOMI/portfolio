@@ -6,7 +6,7 @@ require_logined_session();
 <div id="main_container">
 
     <!-- 案件投稿フォーム開始 -->
-    <form action="./index.php" method="post" role="form" id="form_job">
+    <form action="./index.php" method="POST" role="form" id="form_job">
         <table>
             <tbody>
                 <tr id="row_job_title" class="form_job_row">

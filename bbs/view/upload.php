@@ -14,7 +14,7 @@ require_logined_session();
     <p>・1行目にはヘッダ情報を含むようにしてください</p>
 
     <!-- アップロードフォーム開始 -->
-    <form action="./index.php" method="post" role="form" enctype="multipart/form-data">
+    <form action="./index.php" method="POST" role="form" enctype="multipart/form-data">
         <div id="btn_job_container">
             <input type="file" class="" id="btn_file_upload" name="csvfile" accept=".csv">
         </div>

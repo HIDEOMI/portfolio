@@ -52,10 +52,11 @@ class getDBAction
     /**
      ** 案件データ一覧をDBから取得するクラスメソッド
      */
-    function getDbPostData()
+    function getDbPostData($page, $display_count)
     {
+        $offset_count = ($page - 1) * $display_count;
         /// 登録済み案件データの取得 ///
-        $sql = "SELECT * FROM job_info ORDER BY job_id DESC;";
+        $sql = "SELECT * FROM job_info ORDER BY job_id DESC LIMIT $offset_count, $display_count";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute();
 

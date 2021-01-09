@@ -28,8 +28,6 @@ if (isset($_POST['event_id'])) {
 $page_name = "案件一覧";
 $content_page = "./view/list.php";
 switch ($event) {
-    case 'test':
-        break;
     case 'form':
         // ==================================================
         // 投稿フォームを表示するイベント
@@ -45,11 +43,9 @@ switch ($event) {
         require_logined_session();  /// ログイン状態のチェック
         /// DBに記事データを保存 ///
         $action->saveDBJobInfo($_POST);
-        /// 案件一覧画面を表示する ///
-        /// 案件データ一覧取得 ///
-        $job_datas = $action->getDbPostData();
-        /// 案件カウント取得///
-        $job_counts = $action->getCountData();
+        /// 投稿フォームを表示する ///
+        $page_name = "案件作成";
+        $content_page = "./view/form.php";
         break;
     case 'upload':
         // ==================================================
@@ -76,7 +72,6 @@ switch ($event) {
         // ==================================================
         // require_unlogined_session();  /// ログイン状態のチェック
         $page_name = "ログインページ";
-        // $content_page = "./view/login.php";
         $content_page = "./php/login_chk.php";
         break;
     case 'loginChk':
@@ -110,7 +105,15 @@ switch ($event) {
         // デフォルトイベント（案件一覧画面を表示する）
         // ==================================================
         /// 案件データ一覧取得 ///
-        $job_datas = $action->getDbPostData();
+        $page = 1;
+        $display_count = 10;
+        if (isset($_GET['page'])) {
+            $page = $_GET['page'];
+        }
+        if (isset($_GET['display_count'])) {
+            $display_count = $_GET['display_count'];
+        }
+        $job_datas = $action->getDbPostData($page, $display_count);
         /// 案件カウント取得///
         $job_counts = $action->getCountData();
         break;
@@ -128,9 +131,7 @@ switch ($event) {
     <!-- 基本のCSS -->
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/contents.css">
-    <title>
-        <?php echo "パーソル案件閲覧クン | " . $page_name ?>
-    </title>
+    <title><?php echo "パーソル案件閲覧クン | " . $page_name ?></title>
 </head>
 
 <!-- ページ開始 -->
@@ -140,6 +141,10 @@ switch ($event) {
     <?php
     /// ヘッダーを表示する
     require './parts/header.php';
+    if ($event_msg != "") {
+        /// イベントメッセージを表示する
+        require './parts/event_msg.php';
+    }
     ?>
 
     <!-- ページ見出し開始 -->
@@ -150,7 +155,7 @@ switch ($event) {
                 <?php if (isset($_SESSION['username'])) : ?>
                     <h2 id="page_header_msg">ようこそ，<?php echo h($_SESSION['username']) ?>さん</h2>
                 <?php else : ?>
-                    <h2 id="page_header_msg">ようこそ！</h2>
+                    <h2 id="page_header_msg">サイトへようこそ！</h2>
                     <!-- <p>ログインはこちら！</p> -->
                 <?php endif; ?>
             </div>
@@ -179,4 +184,4 @@ switch ($event) {
 </body>
 
 </html>
-<!------   HTML 開始   ------>
+<!------   HTML 終了   ------>
