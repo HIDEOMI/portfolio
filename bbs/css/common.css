@@ -190,7 +190,7 @@ footer {
     height: 100%;
     text-align: center;
     animation: fadein-keyframes 1.5s ease 0s 1 forwards;
-    /* visibility: hidden; */
+    visibility: hidden;
 }
 #flash_window {
     display: inline-block;
@@ -206,7 +206,7 @@ footer {
     color: var(--color-5, black);
 }
 @keyframes fadein-keyframes {
-    0% {opacity: 1;}
-    80% {opacity: 1;}
-    100% {opacity: 0;}
+    0% {visibility: visible; opacity: 1;}
+    80% {visibility: visible; opacity: 1;}
+    100% {visibility: hidden; opacity: 0;}
 }

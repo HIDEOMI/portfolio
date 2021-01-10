@@ -22,6 +22,9 @@ class getDBAction
         /// エラー発生時に例外を投げる ///
         $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
+    // ==================================================
+    // ユーザ情報に関するメソッド
+    // ==================================================
     /**
      ** ログイン情報を取得するクラスメソッド
      */
@@ -35,6 +38,42 @@ class getDBAction
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
     }
+    /**
+     ** ユーザ情報を登録するクラスメソッド
+     */
+    function addUser($username, $password)
+    {
+        /// SQL文 ///
+        $sql = "INSERT INTO users(name, password) VALUES (:name, :password)";
+        /// トランザクション開始 ///
+        $this->pdo->beginTransaction();
+        try {
+            /// SQL文の発行 ///
+            $stmt = $this->pdo->prepare($sql);
+            /// bind処理をする ///
+            $stmt->bindParam(':name', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':password', $password, PDO::PARAM_STR);
+            $stmt->execute();
+
+            /// コミット ///
+            $this->pdo->commit();
+        } catch (PDOException $e) {
+            //ロールバック ///
+            $this->pdo->rollback();
+            /// エラーメッセージ出力 ///
+            // print_r($stmt->errorInfo());
+            $errMsg  = $e->getMessage();
+            // $errMsg  = "データベースに登録ができませんでした！";
+        }
+        /// エラーメッセージがある場合は結果に返す ///
+        if ($errMsg) {
+            $msg = $errMsg;
+        }
+        return $msg;
+    }
+    // ==================================================
+    // 案件データに関するメソッド
+    // ==================================================
     /**
      ** 案件データ一覧の件数をDBから取得するクラスメソッド
      */
@@ -69,12 +108,14 @@ class getDBAction
      */
     function saveDBJobInfo($data)
     {
+        /// データの保存 ///
+        $sql = "INSERT INTO job_info (url, title, job_id, type, tips, wage, occupation, industry, work_location, description, skill, hours, holiday, working_period, working_info, updated_at, created_at) VALUES('aaa', :title, :job_id, :type, :tips, :wage, :occupation, :industry, :work_location, :description, :skill, :hours, :holiday, :working_period, :working_info, now(), now())";
+        /// トランザクション開始 ///
+        $this->pdo->beginTransaction();
         try {
-            /// データの保存 ///
-            // $sql = "INSERT INTO 'job_info' ('title', 'job_id', 'tips', 'created_at') VALUES(:title, :job_id, :tips, now())";
-            $sql = "INSERT INTO job_info (url, title, job_id, type, tips, wage, occupation, industry, work_location, description, skill, hours, holiday, working_period, working_info, updated_at, created_at) VALUES('aaa', :title, :job_id, :type, :tips, :wage, :occupation, :industry, :work_location, :description, :skill, :hours, :holiday, :working_period, :working_info, now(), now())";
+            /// SQL文の発行 ///
             $stmt = $this->pdo->prepare($sql);
-            // $stmt->bindParam(':url', $data['title'], PDO::PARAM_STR);
+            /// bind処理をする ///
             $stmt->bindParam(':title', $data['title'], PDO::PARAM_STR);
             $stmt->bindParam(':job_id', $data['job_id'], PDO::PARAM_STR);
             $stmt->bindParam(':type', $data['type'], PDO::PARAM_STR);
@@ -91,12 +132,21 @@ class getDBAction
             $stmt->bindParam(':working_info', $data['working_info'], PDO::PARAM_STR);
             $stmt->execute();
 
-            /// エラーの場合はエラー情報を表示する///
-            print_r($stmt->errorInfo());
-        } catch (Exception $e) {
-            /// エラーの場合はエラー情報を表示する///
-            var_dump($e);
+            /// コミット ///
+            $this->pdo->commit();
+        } catch (PDOException $e) {
+            //ロールバック ///
+            $this->pdo->rollback();
+            /// エラーメッセージ出力 ///
+            // print_r($stmt->errorInfo());
+            $errMsg  = $e->getMessage();
+            // $errMsg  = "データベースに登録ができませんでした！";
         }
+        /// エラーメッセージがある場合は結果に返す ///
+        if ($errMsg) {
+            $msg = $errMsg;
+        }
+        return $msg;
     }
     /**
      ** 案件データのCSVをDBに保存するクラスメソッド
@@ -136,6 +186,7 @@ class getDBAction
         } else {
             $errMsg = '・ファイルが選択されていません！';
         }
+        // return $errMsg;
 
         // ==================================================
         // 配列データをDBに保存するフロー
@@ -149,12 +200,12 @@ class getDBAction
         $sizeAryCSV = count($aryCSV);  /// CSVの行数の定義
 
         /// カラム名の定義 ///
-        $tmpAry = [];
+        $headerNameAry = [];
         foreach ($aryHeader as $headerName) {
-            $tmpAry[] = $headerName;
+            $headerNameAry[] = $headerName;
         }
         /// 定義したカラム名を導入文と結合する ///
-        $sql .= '(' . implode(',', $tmpAry) . ')';
+        $sql .= '(' . implode(',', $headerNameAry) . ')';
         // echo "<br>" . $sql . "<br>";
 
         /// バインドのためのVALUEを定義する ///
@@ -170,12 +221,21 @@ class getDBAction
         }
         /// 定義したバインドのためのVALUEを結合する ///
         $sql .= ' VALUES ' . implode(',', $tmpAry1);
-        // echo "<br>" . $sql . "<br>";
+        /// UPDATE文を作成する ///
+        $sql .= ' ON DUPLICATE KEY UPDATE ';
+        $tmpAry3 = [];
+        foreach ($aryHeader as $headerName) {
+            /// 【job_id】以外を更新する ///
+            if ($headerName != 'job_id') {
+                $tmpAry3[] = $headerName . ' = ' . 'VALUES(' . $headerName . ')';
+            }
+        }
+        $sql .= implode(',', $tmpAry3);
 
         /// トランザクション開始 ///
         $this->pdo->beginTransaction();
         try {
-            /// sql分の発行 ///
+            /// SQL文の発行 ///
             $stmt = $this->pdo->prepare($sql);
 
             /// bind処理をする ///
@@ -185,8 +245,6 @@ class getDBAction
                 foreach ($aryHeader as $colIdx => $headerName) {
                     $targetValue = $aryCSV[$rowIdx][$colIdx];
                     $stmt->bindValue(':' . $headerName . $rowIdx, $targetValue, PDO::PARAM_STR);
-                    // echo "<br>" . ':' . $headerName . $rowIdx . ", " . $targetValue . "<br>";
-
                 }
             }
 
@@ -198,8 +256,8 @@ class getDBAction
             //ロールバック ///
             $this->pdo->rollback();
             /// エラーメッセージ出力 ///
-            // $errMsg  = $e->getMessage();
-            $errMsg  = "データベースに登録ができませんでした！";
+            $errMsg  = $e->getMessage();
+            // $errMsg  = "データベースに登録ができませんでした！";
         }
         /// エラーメッセージがある場合は結果に返す ///
         if ($errMsg) {

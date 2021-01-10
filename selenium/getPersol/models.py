@@ -70,11 +70,6 @@ class Persol():
     CHROME_DRIVER_PATH = "C:/Project/python/selenium/getPersol/chromedriver.exe"
     FILE_PATH = "C:/Project/python/selenium/getPersol/"
 
-    # CHROME_DRIVER_PATH = "/var/www/html/portfolio/getPersol/chromedriver.exe"
-    # FILE_PATH = "../"
-    persol_URL = "https://persol-tech-s.co.jp/jobsearch/result/A1knt/A2tky/J2apdev_J2nwcons/?displayCount=100"
-    # persol_URL = "https://persol-tech-s.co.jp/jobsearch/result/A1knt/A2tky/J2apdev_J2nwcons/?displayCount=10"
-
     def __init__(self):
         print("\n=======  ブラウザ(ドライバ)を起動します  =======")
         # ChromeDriverのパスを引数に指定しChromeを起動
@@ -107,21 +102,34 @@ class Persol():
         ]
         return header_line
 
-    def addArrayIDFromListPage(self):
+    def addArrayIDFromListPage(self, count):
         """
         【案件一覧ページ】から【案件ID】と【案件名】の辞書を取得するクラスメソッド
         """
-        print("\n=== 案件一覧ページにアクセスします ===")
-        ### パーソルの案件情報一覧ページにアクセス ##
-        self.driver.get(self.persol_URL)
-
-        print("=== 案件ID一覧を取得します ===")
-        job_card_num_elements = self.driver.find_elements_by_class_name(
-            "p-job-card__number")
-        for job_card_num_element in job_card_num_elements:
-            job_number = job_card_num_element.text
-            job_number = job_number.replace("お仕事No.", "")
-            self.array_ID.append(job_number)
+        # persol_url = "https://persol-tech-s.co.jp/jobsearch/result/A1knt/A2tky/J2apdev_J2nwcons/?displayCount=100"
+        target_page = 0
+        total_count = 0
+        while(total_count < count):
+            print("\n=== 案件一覧ページにアクセスします ===")
+            print("現在：" + str(total_count))
+            print("残り：" + str(count - total_count))
+            target_page += 1
+            target_url = "https://persol-tech-s.co.jp/jobsearch/result/page_" + \
+                str(target_page) + \
+                "/A1knt/A2tky/J2apdev_J2nwcons/?displayCount=100"
+            self.driver.get(target_url)
+            ### パーソルの案件情報一覧ページにアクセス ##
+            print("=== 案件ID一覧を取得します ===")
+            job_card_num_elements = self.driver.find_elements_by_class_name(
+                "p-job-card__number")
+            for job_card_num_element in job_card_num_elements:
+                job_number = job_card_num_element.text
+                job_number = job_number.replace("お仕事No.", "")
+                self.array_ID.append(job_number)
+            if (len(self.array_ID) == total_count):
+                break
+            else:
+                total_count = len(self.array_ID)
 
     def getJobInfoFromID(self, target_ID):
         """
@@ -135,72 +143,75 @@ class Persol():
 
         print("=== 案件情報を取得します ===")
         job = Job(target_ID)
-        job.url = target_URL
-        # print("・案件名")
-        breadcrumbs_link_elements = self.driver.find_elements_by_class_name(
-            "p-breadcrumbs__link")
-        job.title = breadcrumbs_link_elements[5].text
-        # print(job.title)
+        try:
+            job.url = target_URL
+            # print("・案件名")
+            breadcrumbs_link_elements = self.driver.find_elements_by_class_name(
+                "p-breadcrumbs__link")
+            job.title = breadcrumbs_link_elements[5].text
+            # print(job.title)
 
-        # print("・タイプ")
-        detail_icon_elements = self.driver.find_elements_by_class_name(
-            "p-job-detail__icon")
-        job.type = detail_icon_elements[0].text
-        # print(job.type)
+            # print("・タイプ")
+            detail_icon_elements = self.driver.find_elements_by_class_name(
+                "p-job-detail__icon")
+            job.type = detail_icon_elements[0].text
+            # print(job.type)
 
-        # print("・おすすめポイント")
-        job_tips_element = self.driver.find_element_by_class_name(
-            "p-job-detail__point-data")
-        job.tips = job_tips_element.text
-        # print(job.tips)
+            # print("・おすすめポイント")
+            job_tips_element = self.driver.find_element_by_class_name(
+                "p-job-detail__point-data")
+            job.tips = job_tips_element.text
+            # print(job.tips)
 
-        # print("=== 表の情報を取得します ===")
-        job_detail_elements = self.driver.find_elements_by_class_name(
-            "p-job-detail__data")
+            # print("=== 表の情報を取得します ===")
+            job_detail_elements = self.driver.find_elements_by_class_name(
+                "p-job-detail__data")
 
-        # print("・給与")
-        job.wage = job_detail_elements[0].text
-        # print(job.wage)
+            # print("・給与")
+            job.wage = job_detail_elements[0].text
+            # print(job.wage)
 
-        # print("・職種")
-        job.occupation = job_detail_elements[1].text
-        # print(job.occupation)
+            # print("・職種")
+            job.occupation = job_detail_elements[1].text
+            # print(job.occupation)
 
-        # print("・業種")
-        job.industry = job_detail_elements[2].text
-        # print(job.industry)
+            # print("・業種")
+            job.industry = job_detail_elements[2].text
+            # print(job.industry)
 
-        # print("・勤務地")
-        job.work_location = job_detail_elements[3].text
-        # print(job.work_location)
+            # print("・勤務地")
+            job.work_location = job_detail_elements[3].text
+            # print(job.work_location)
 
-        # print("・仕事内容")
-        job.description = job_detail_elements[4].text
-        # print(job.description)
+            # print("・仕事内容")
+            job.description = job_detail_elements[4].text
+            # print(job.description)
 
-        # print("・活かせるスキル")
-        job.skill = job_detail_elements[5].text
-        # print(job.skill)
+            # print("・活かせるスキル")
+            job.skill = job_detail_elements[5].text
+            # print(job.skill)
 
-        # print("・勤務時間")
-        job.hours = job_detail_elements[6].text
-        # print(job.hours)
+            # print("・勤務時間")
+            job.hours = job_detail_elements[6].text
+            # print(job.hours)
 
-        # print("・休日")
-        job.holiday = job_detail_elements[7].text
-        # print(job.holiday)
+            # print("・休日")
+            job.holiday = job_detail_elements[7].text
+            # print(job.holiday)
 
-        # print("・勤務期間")
-        job.working_period = job_detail_elements[8].text
-        # print(job.working_period)
+            # print("・勤務期間")
+            job.working_period = job_detail_elements[8].text
+            # print(job.working_period)
 
-        # print("・職場について")
-        job.working_info = job_detail_elements[9].text
-        # print(job.working_info_info)
+            # print("・職場について")
+            job.working_info = job_detail_elements[9].text
+            # print(job.working_info_info)
 
-        # print("・お問い合わせ先")
-        # job.contact = job_detail_elements[11].text
-        # print(job.contact)
+            # print("・お問い合わせ先")
+            # job.contact = job_detail_elements[11].text
+            # print(job.contact)
+        except:
+            pass
         job_info = job.getArray()
         return job_info
 
@@ -209,9 +220,13 @@ class Persol():
         クラスメソッド
         """
         print("\n=== 【案件ID】毎に【案件情報】を配列として取得します ===")
+        count = 1
         for job_id in self.array_ID:
+            print("現在の件数：" + str(count))
             job_iinfo = self.getJobInfoFromID(job_id)
             self.obj_job[job_id] = job_iinfo
+            count += 1
+            time.sleep(1)
 
     def saveCSV(self):
         """
@@ -220,7 +235,7 @@ class Persol():
         print("\n=== 【案件情報の配列】をCSVに保存します ===")
 
         dt_now = datetime.datetime.now()
-        now =  dt_now.strftime('_%y%m%d_%H%M')
+        now = dt_now.strftime('_%y%m%d_%H%M')
         output_filename = "persol" + now + ".csv"
         save_data = []
         save_data.append(self.getHeaderInfo())

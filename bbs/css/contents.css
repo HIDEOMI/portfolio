@@ -78,9 +78,10 @@
 /* 案件カードの上部 */
 /* ================================================== */
 .job_title {
-    display: inline-block;
+    display: block;
 }
 .job_status {
+    width: 100%;
     margin: 10px 0px;
 }
 .job_status_item {

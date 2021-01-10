@@ -1,11 +1,11 @@
 <?php
 // ==================================================
-// ログイン関連のイベントについてのPHP
+// ユーザ登録関連のイベントについてのPHP
 // ==================================================
 
-if ($event === "loginChk") {
+if ($event === "addUser") {
     // ==================================================
-    // ログインの確認フロー
+    // ユーザ情報の確認フロー
     // ==================================================
     if (empty($_POST["username"]) || empty($_POST["password"])) {
         /// ユーザー名またはパスワードが送信されて来なかった場合、エラーメッセージを表示して終了する ///
@@ -16,42 +16,24 @@ if ($event === "loginChk") {
         /// ユーザから受け取ったユーザ名とパスワード ///
         $input_username = filter_input(INPUT_POST, 'username');
         $input_password = filter_input(INPUT_POST, 'password');
+        $input_password_re = filter_input(INPUT_POST, 'password_re');
         $user_data = $action->getUserInfo($input_username);
 
-        /// パスワードをチェック ///
-        if (validate_password($input_password, $user_data['password'])) {
-            /// 認証が成功した場合 ///
-            // ==================================================
-            // ログイン成功イベント
-            // ==================================================
-            session_regenerate_id(true);  /// セッションIDの追跡を防ぐためにセッションID再発行
-            /// ユーザ名をセット ///
-            $_SESSION['username'] = $input_username;
-            /// 管理者情報をセット ///
-            $_SESSION['adminUser'] = $user_data['admin'];
-            /// ユーザIDをセット ///
-            $_SESSION['userID'] = $user_data['user_id'];
-            /// index.php に遷移 ///
-            header('Location: ./index.php');
-            exit;
-        } else {
-            /// 認証が失敗した場合 ///
+        if ($user_data) {
+            /// ユーザ名が既に存在した場合 ///
             /// 「403 Forbidden」 ///
             http_response_code(403);
+        } else if ($input_password != $input_password_re) {
+            /// パスワードの確認が失敗した場合 ///
+            $message = "再入力したパスワードが間違っています";
+        } else {
+            /// 登録作業 ///
+            $hash_password = password_hash($input_password, PASSWORD_DEFAULT);
+            $action->addUser($input_username, $hash_password);
+            /// 登録完了メッセージ ///
+            $message = "ユーザ登録が完了しました";
         }
     }
-} elseif ($event === "logout") {
-    // ==================================================
-    // ログアウトイベント
-    // ==================================================
-    // セッション用Cookieの破棄
-    setcookie(session_name(), '', 1);
-    session_unset();
-    // セッションファイルの破棄
-    session_destroy();
-    /// index.php に遷移 ///
-    header('Location: ./index.php');
-    exit;
 }
 
 $message = h($message);
@@ -60,12 +42,13 @@ $message = h($message);
 
 <div id="main_container">
     <div id="form_lead">
-        <h3>ログインしてください</h3>
+        <h3>ユーザの新規登録を行います</h3>
+        <h3>ユーザ名とパスワードを入力してください</h3>
         <?php if ($message) : ?>
             <p style="color: red;"><?php echo $message ?></p>
         <?php endif; ?>
         <?php if (http_response_code() === 403) : ?>
-            <p style="color: red;">ユーザ名またはパスワードが違います</p>
+            <p style="color: red;">ユーザ名を変更してください！</p>
         <?php endif; ?>
     </div>
 
@@ -89,10 +72,18 @@ $message = h($message);
                         <input type="password" name="password" class="form_job_input" value="" placeholder="パスワード" />
                     </td>
                 </tr>
+                <tr id="row_job_number" class="form_job_row">
+                    <th>
+                        <label>パスワード（再入力）</label>
+                    </th>
+                    <td>
+                        <input type="password" name="password_re" class="form_job_input" value="" placeholder="パスワード（再入力）" />
+                    </td>
+                </tr>
             </tbody>
         </table>
         <div id="btn_job_container">
-            <button type="submit" class="btn_job" id="btn_upload" name="event_id" value="loginChk">ログイン</button>
+            <button type="submit" class="btn_job" id="btn_submit" name="event_id" value="addUser">新規登録</button>
             <a href="./index.php" class="btn_job" id="btn_cancel">キャンセル</a>
         </div>
     </form>

@@ -1,17 +1,21 @@
 <?php
+/// 総ページ数の取得 ///
 $total_page = ceil($job_counts / $display_count);
+/// ページネーションの数字を取得 ///
 $array_pages = [];
-if ($total_page >= 5) {
+if ($total_page <= 5) {
+    /// 総ページ数が5ページ以下の場合、全ページをページネーションとして取得 ///
+    for ($i = 1; $i <= $total_page; $i++) {
+        $array_pages[] = $i;
+    }
+} else {
+    /// 総ページ数が5ページより多い場合 ///
     if ($page < 3) {
         $array_pages = [1, 2, 3, 4, 5];
     } else if (($page >= 3) && ($total_page - $page > 2)) {
         $array_pages = [$page - 2, $page - 1, $page, $page + 1, $page + 2];
     } else {
         $array_pages = [$total_page - 4, $total_page - 3, $total_page - 2, $total_page - 1, $total_page];
-    }
-} else {
-    for ($i = 1; $i <= $total_page; $i++) {
-        $array_pages[] = $i;
     }
 }
 ?>

@@ -21,6 +21,10 @@ $event = null;
 if (isset($_POST['event_id'])) {
     $event = $_POST['event_id'];
 }
+/// イベントメッセージの定義 ///
+$event_msg = "";
+
+$event_msg = $event;
 
 // ==================================================
 // イベントによって処理が分岐する
@@ -92,13 +96,15 @@ switch ($event) {
         // ==================================================
         // ユーザの登録フォームを表示するイベント
         // ==================================================
-        // セキュリティの問題で今はやってない
+        $page_name = "新規登録";
+        $content_page = "./php/sign_up.php";
         break;
     case 'addUser':
         // ==================================================
         // ユーザの新規登録の処理を行うイベント
         // ==================================================
-        // セキュリティの問題で今はやってない
+        $page_name = "新規登録";
+        $content_page = "./php/sign_up.php";
         break;
     default:
         // ==================================================
@@ -131,7 +137,7 @@ switch ($event) {
     <!-- 基本のCSS -->
     <link rel="stylesheet" href="./css/common.css">
     <link rel="stylesheet" href="./css/contents.css">
-    <title><?php echo "パーソル案件閲覧クン | " . $page_name ?></title>
+    <title><?php echo $page_name . " | パーソル案件閲覧クン" ?></title>
 </head>
 
 <!-- ページ開始 -->

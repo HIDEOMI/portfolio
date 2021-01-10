@@ -1,21 +1,20 @@
 # coding: utf-8
-#######  ライブラリのインポート  #######
+# ==================================================
+# 実行関数の定義
+# ==================================================
 
-#######  実行関数の定義  #######
 def main():
-    """ 処理のメインフロー """
+    """ 案件情報のCSVを取得する実行関数 """
     
     from models import Persol  # クラスモジュールのインポート
     persol = Persol()  # インスタンス生成
 
-    persol.addArrayIDFromListPage()
-    # id_ = "I-E201207034-IT"
-    # persol.array_ID = [id_]
-    # persol.getJobInfoFromID(id_)
+    persol.addArrayIDFromListPage(300)
     persol.setJobInfoFromArrayID()
     persol.saveCSV()
 
-
-#######  メインフロー  #######
+# ==================================================
+# メインフロー
+# ==================================================
 if __name__ == "__main__":
     main()
