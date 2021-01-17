@@ -26,14 +26,14 @@ class getDBAction
     // ユーザ情報に関するメソッド
     // ==================================================
     /**
-     ** ログイン情報を取得するクラスメソッド
+     ** ユーザ情報を取得するクラスメソッド
      */
     function getUserInfo($input_username)
     {
         /// post送信されてきたユーザー名がデータベースにあるか検索する ///
-        $sql = "SELECT * FROM users WHERE name=?";
+        $sql = "SELECT * FROM users WHERE name=:name";
         $stmt = $this->pdo->prepare($sql);
-        $stmt->bindParam(1, $input_username, PDO::PARAM_STR, 10);
+        $stmt->bindParam(':name', $input_username, PDO::PARAM_STR, 10);
         $stmt->execute();
         $result = $stmt->fetch(PDO::FETCH_ASSOC);
         return $result;
@@ -41,7 +41,7 @@ class getDBAction
     /**
      ** ユーザ情報を登録するクラスメソッド
      */
-    function addUser($username, $password)
+    function addUser($user_name, $password)
     {
         /// SQL文 ///
         $sql = "INSERT INTO users(name, password) VALUES (:name, :password)";
@@ -51,7 +51,7 @@ class getDBAction
             /// SQL文の発行 ///
             $stmt = $this->pdo->prepare($sql);
             /// bind処理をする ///
-            $stmt->bindParam(':name', $username, PDO::PARAM_STR);
+            $stmt->bindParam(':name', $user_name, PDO::PARAM_STR);
             $stmt->bindParam(':password', $password, PDO::PARAM_STR);
             $stmt->execute();
 
@@ -70,6 +70,125 @@ class getDBAction
             $msg = $errMsg;
         }
         return $msg;
+    }
+    /**
+     ** ユーザ情報一覧を取得するクラスメソッド
+     */
+    function getDbUserData()
+    {
+        /// 登録済みのユーザ情報の取得 ///
+        $sql = "SELECT * FROM users ORDER BY user_id";
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute();
+
+        /// 実行結果を配列に渡す ///
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    /**
+     ** 該当ユーザの認証状態を切り替えるクラスメソッド
+     */
+    function changeAuthState($user_id, $user_name)
+    {
+        /// 最初にユーザ情報を問合わせる ///
+        $userInfo = $this->getUserInfo($user_name);
+        $bool = 0;
+        if ($userInfo['authorization'] == 0) {
+            /// 認証が拒否状態なら、許可にする ///
+            $bool = 1;
+        };
+        // return $bool;
+        /// SQL文 ///
+        $sql = "UPDATE `users` SET `authorization`=:bool WHERE `user_id`=:user_id AND `name`=:name";
+        /// トランザクション開始 ///
+        $this->pdo->beginTransaction();
+        try {
+            /// SQL文の発行 ///
+            $stmt = $this->pdo->prepare($sql);
+            /// bind処理をする ///
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+            $stmt->bindParam(':name', $user_name, PDO::PARAM_STR);
+            $stmt->bindParam(':bool', $bool, PDO::PARAM_BOOL);
+            $stmt->execute();
+
+            /// コミット ///
+            $this->pdo->commit();
+        } catch (PDOException $e) {
+            //ロールバック ///
+            $this->pdo->rollback();
+            /// エラーメッセージ出力 ///
+            // print_r($stmt->errorInfo());
+            $errMsg  = $e->getMessage();
+        }
+        /// エラーメッセージがある場合は結果に返す ///
+        return $errMsg;
+    }
+    /**
+     ** 該当ユーザの管理者権限の状態を切り替えるクラスメソッド
+     */
+    function changeAdminState($user_id, $user_name)
+    {
+        /// 最初にユーザ情報を問合わせる ///
+        $userInfo = $this->getUserInfo($user_name);
+        $bool = 0;
+        if ($userInfo['admin'] == 0) {
+            /// 認証が拒否状態なら、許可にする ///
+            $bool = 1;
+        };
+        // return $bool;
+        /// SQL文 ///
+        $sql = "UPDATE `users` SET `admin`=:bool WHERE `user_id`=:user_id AND `name`=:name";
+        /// トランザクション開始 ///
+        $this->pdo->beginTransaction();
+        try {
+            /// SQL文の発行 ///
+            $stmt = $this->pdo->prepare($sql);
+            /// bind処理をする ///
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+            $stmt->bindParam(':name', $user_name, PDO::PARAM_STR);
+            $stmt->bindParam(':bool', $bool, PDO::PARAM_BOOL);
+            $stmt->execute();
+
+            /// コミット ///
+            $this->pdo->commit();
+        } catch (PDOException $e) {
+            //ロールバック ///
+            $this->pdo->rollback();
+            /// エラーメッセージ出力 ///
+            // print_r($stmt->errorInfo());
+            $errMsg  = $e->getMessage();
+        }
+        /// エラーメッセージがある場合は結果に返す ///
+        return $errMsg;
+    }
+    /**
+     ** 該当のユーザ情報を削除するクラスメソッド
+     */
+    function deleteUser($user_id, $user_name)
+    {
+        /// SQL文 ///
+        $sql = "DELETE FROM users WHERE user_id=:user_id AND name=:name LIMIT 1";
+        /// トランザクション開始 ///
+        $this->pdo->beginTransaction();
+        try {
+            /// SQL文の発行 ///
+            $stmt = $this->pdo->prepare($sql);
+            /// bind処理をする ///
+            $stmt->bindParam(':user_id', $user_id, PDO::PARAM_STR);
+            $stmt->bindParam(':name', $user_name, PDO::PARAM_STR);
+            $stmt->execute();
+
+            /// コミット ///
+            $this->pdo->commit();
+        } catch (PDOException $e) {
+            //ロールバック ///
+            $this->pdo->rollback();
+            /// エラーメッセージ出力 ///
+            // print_r($stmt->errorInfo());
+            $errMsg  = $e->getMessage();
+        }
+        /// エラーメッセージがある場合は結果に返す ///
+        return $errMsg;
     }
     // ==================================================
     // 案件データに関するメソッド

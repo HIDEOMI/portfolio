@@ -106,6 +106,44 @@ switch ($event) {
         $page_name = "新規登録";
         $content_page = "./php/sign_up.php";
         break;
+    case 'manageUser':
+        // ==================================================
+        // ユーザの管理フォームを表示するイベント
+        // ==================================================
+        $user_datas = $action->getDbUserData();
+        $page_name = "ユーザ管理";
+        $content_page = "./php/manage_user.php";
+        break;
+    case 'userAuth':
+        // ==================================================
+        // ユーザ認証の状態を切り替えるイベント
+        // ==================================================
+        $event_msg = $action->changeAuthState($_POST['user_id'], $_POST['name']);
+        // $event_msg = "認証状態を切替えました！";
+        $user_datas = $action->getDbUserData();
+        $page_name = "ユーザ管理";
+        $content_page = "./php/manage_user.php";
+        break;
+    case 'adminAdd':
+        // ==================================================
+        // 管理者権限の状態を切り替えるイベント
+        // ==================================================
+        $event_msg = $action->changeAdminState($_POST['user_id'], $_POST['name']);
+        // $event_msg = "管理者権限を切替えました！";
+        $user_datas = $action->getDbUserData();
+        $page_name = "ユーザ管理";
+        $content_page = "./php/manage_user.php";
+        break;
+    case 'userDelete':
+        // ==================================================
+        // ユーザ情報を削除するイベント
+        // ==================================================
+        $action->deleteUser($_POST['user_id'], $_POST['name']);
+        $event_msg = "ユーザを削除しました！";
+        $user_datas = $action->getDbUserData();
+        $page_name = "ユーザ管理";
+        $content_page = "./php/manage_user.php";
+        break;
     default:
         // ==================================================
         // デフォルトイベント（案件一覧画面を表示する）
@@ -172,7 +210,6 @@ switch ($event) {
     <div id="main_wrapper">
 
         <?php
-        echo $event . "<br>";
         // ==================================================
         // イベントに対応したコンテンツの表示
         // ==================================================

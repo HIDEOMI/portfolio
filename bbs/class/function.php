@@ -75,7 +75,7 @@ function url_param_change($par = array(), $op = 0)
 	}
 	$query = str_replace("=&", "&", http_build_query($query));
 	$query = preg_replace("/=$/", "", $query);
-	return URL . $query ? (!$op ? "?" : "") . htmlspecialchars($query, ENT_QUOTES) : "";
+	return $query ? (!$op ? "?" : "") . htmlspecialchars($query, ENT_QUOTES) : "";
 }
 /**
  ** パラメータを編集したURLをechoする関数

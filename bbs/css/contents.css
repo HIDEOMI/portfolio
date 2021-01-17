@@ -227,3 +227,33 @@
 #login_table {
     margin: 0 auto;
 }
+/* ================================================== */
+/* ユーザ管理フォーム */
+/* ================================================== */
+#user_table_container {
+    width: 900px;
+    margin: 50px auto;
+    padding: 25px 40px;
+    border-radius: 9px;
+    background-color: var(--color-1, whitesmoke);
+}
+#user_table {
+    margin: 0 auto;
+}
+.user_table_row_head {
+    padding: 8px;
+    font-size: 1.4rem;
+    color: var(--color-1, whitesmoke);
+    background-color: var(--color-4, grey);
+}
+.user_table_row_data {
+    border-bottom: solid 1px var(--color-4, grey);
+}
+.admin_btn {
+    padding: 7px;
+    font-size: 1.6rem;
+    font-weight: bolder;
+    border-radius: 9px;
+    color: var(--color-5, black);
+    background-color: var(--color-2, grey);
+}

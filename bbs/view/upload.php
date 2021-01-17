@@ -5,11 +5,7 @@ require_logined_session();
 
 <div id="main_container">
 
-    <h4>
-        <?php
-        echo $result_msg;
-        ?>
-    </h4>
+    <h4><?php echo $result_msg; ?></h4>
     <p>・案件データを保存したCSVファイルをアップロードします</p>
     <p>・1行目にはヘッダ情報を含むようにしてください</p>
 

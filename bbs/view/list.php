@@ -1,5 +1,5 @@
 <!-- 案件コンテンツ開始 -->
-<div id="#job_card_wrapper">
+<div id="job_card_wrapper">
 
     <!-- 案件ヘッダー開始 -->
     <div id="main_top_container">
@@ -27,43 +27,43 @@
                     <li>
                         <div class="job_top">
                             <h3 class="job_title">
-                                <a href="<?php echo "$job_row[url]"; ?>"><?php echo "$job_row[title]"; ?></a>
+                                <a href="<?php echo $job_row['url']; ?>"><?php echo $job_row['title']; ?></a>
                             </h3>
                             <div class="job_status">
                                 <!-- <p class="job_status_item">新規</p> -->
                                 <!-- <p class="job_status_item">お気に入り</p> -->
-                                <p class="job_num"><?php echo "お仕事No: $job_row[job_id]"; ?></p>
+                                <p class="job_num"><?php echo "お仕事No: " . $job_row['job_id']; ?></p>
                             </div>
-                            <div class="job_lead"><?php echo "$job_row[description]"; ?></div>
+                            <div class="job_lead"><?php echo $job_row['description']; ?></div>
                         </div>
                         <div class="job_middle">
                             <table class="job_table">
                                 <tbody>
                                     <tr class="job_table_row">
                                         <th class="job_table_row_head">案件種別</th>
-                                        <td class="job_table_row_data"><?php echo "$job_row[type]"; ?></td>
+                                        <td class="job_table_row_data"><?php echo $job_row['type']; ?></td>
                                     </tr>
                                     <tr class="job_table_row">
                                         <th class="job_table_row_head">職種</th>
-                                        <td class="job_table_row_data"><?php echo "$job_row[occupation]"; ?></td>
+                                        <td class="job_table_row_data"><?php echo $job_row['occupation']; ?></td>
                                     </tr>
                                     <tr class="job_table_row">
                                         <th class="job_table_row_head">給与</th>
-                                        <td class="job_table_row_data"><?php echo "$job_row[wage]"; ?></td>
+                                        <td class="job_table_row_data"><?php echo $job_row['wage']; ?></td>
                                     </tr>
                                     <tr class="job_table_row">
                                         <th class="job_table_row_head">勤務地</th>
-                                        <td class="job_table_row_data"><?php echo_sanitize_br("$job_row[work_location]"); ?></td>
+                                        <td class="job_table_row_data"><?php echo_sanitize_br($job_row['work_location']); ?></td>
                                     </tr>
                                     <tr class="job_table_row">
                                         <th class="job_table_row_head">勤務時間</th>
-                                        <td class="job_table_row_data"><?php echo_sanitize_br("$job_row[hours]"); ?></td>
+                                        <td class="job_table_row_data"><?php echo_sanitize_br($job_row['hours']); ?></td>
                                     </tr>
                                 </tbody>
                             </table>
                             <div class="job_middle_right">
                                 <p class="job_tips_title">おすすめポイント</p>
-                                <p class="job_tips"><?php echo_sanitize_br("$job_row[tips]"); ?></p>
+                                <p class="job_tips"><?php echo_sanitize_br($job_row['tips']); ?></p>
                             </div>
                         </div>
                         <div class="job_bottom">
@@ -78,7 +78,7 @@
                                     </button>
                                 <?php endif; ?>
                                 <button class="job_btn">
-                                    <a class="job_btn_link_detail" href="<?php echo "$job_row[url]"; ?>">求人の詳細を見る</a>
+                                    <a class="job_btn_link_detail" href="<?php echo $job_row['url']; ?>">求人の詳細を見る</a>
                                 </button>
                                 <?php if (isset($_SESSION['username'])) : ?>
                                     <button class="job_btn">
